@@ -16,6 +16,36 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@material/mwc-base@^0.1.2":
+  version "0.1.2"
+  resolved "http://npm.byted.org/@material%2fmwc-base/-/mwc-base-0.1.2.tgz#a17988248c7fe4252305cee4f2fb604f5b0d047a"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+
+"@material/mwc-icon@^0.1.1":
+  version "0.1.2"
+  resolved "http://npm.byted.org/@material%2fmwc-icon/-/mwc-icon-0.1.2.tgz#32ec2f5a48a30014ed97451de0862b1bf51f14e3"
+  dependencies:
+    "@material/mwc-base" "^0.1.2"
+    "@polymer/lit-element" "^0.5.2"
+
+"@polymer/lit-element@^0.5.2":
+  version "0.5.2"
+  resolved "http://npm.byted.org/@polymer%2flit-element/-/lit-element-0.5.2.tgz#8d4e2d1ada27cf0f1a38b7b0eb9fadae92eb63df"
+  dependencies:
+    "@polymer/polymer" "^3.0.2"
+    lit-html "^0.10.0"
+
+"@polymer/polymer@^3.0.2":
+  version "3.0.5"
+  resolved "http://npm.byted.org/@polymer%2fpolymer/-/polymer-3.0.5.tgz#eaa42e70df7de818b5e1839452c82a5f83e39929"
+  dependencies:
+    "@webcomponents/shadycss" "^1.2.0"
+
+"@types/history@*":
+  version "4.7.0"
+  resolved "http://npm.byted.org/@types%2fhistory/-/history-4.7.0.tgz#2fac51050c68f7d6f96c5aafc631132522f4aa3f"
+
 "@types/jest@^23.3.1":
   version "23.3.1"
   resolved "http://npm.byted.org/@types%2fjest/-/jest-23.3.1.tgz#a4319aedb071d478e6f407d1c4578ec8156829cf"
@@ -35,11 +65,47 @@
     "@types/node" "*"
     "@types/react" "*"
 
+"@types/react-intl@^2.3.8":
+  version "2.3.8"
+  resolved "http://npm.byted.org/@types%2freact-intl/-/react-intl-2.3.8.tgz#de56b21b67e39df24bc0fc7e67b437976b666919"
+
+"@types/react-redux@^6.0.6":
+  version "6.0.6"
+  resolved "http://npm.byted.org/@types%2freact-redux/-/react-redux-6.0.6.tgz#87f1d0a6ea901b93fcaf95fa57641ff64079d277"
+  dependencies:
+    "@types/react" "*"
+    redux "^4.0.0"
+
+"@types/react-router-dom@^4.3.0":
+  version "4.3.0"
+  resolved "http://npm.byted.org/@types%2freact-router-dom/-/react-router-dom-4.3.0.tgz#c91796d02deb3a5b24bc1c5db4a255df0d18b8b5"
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
+"@types/react-router@*":
+  version "4.0.30"
+  resolved "http://npm.byted.org/@types%2freact-router/-/react-router-4.0.30.tgz#64bcd886befd1f932779b74d17954adbefb7a3a7"
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^16.4.7":
   version "16.4.7"
   resolved "http://npm.byted.org/@types%2freact/-/react-16.4.7.tgz#f33f6d759a7e1833befa15224d68942d178a5a3f"
   dependencies:
     csstype "^2.2.0"
+
+"@types/redux@^3.6.0":
+  version "3.6.0"
+  resolved "http://npm.byted.org/@types%2fredux/-/redux-3.6.0.tgz#f1ebe1e5411518072e4fdfca5c76e16e74c1399a"
+  dependencies:
+    redux "*"
+
+"@webcomponents/shadycss@^1.2.0":
+  version "1.4.0"
+  resolved "http://npm.byted.org/@webcomponents%2fshadycss/-/shadycss-1.4.0.tgz#2b2b66443252f81d02ebb2dd139e4a717655bfa9"
 
 abab@^1.0.4:
   version "1.0.4"
@@ -3066,6 +3132,16 @@ he@1.1.x:
   version "1.1.1"
   resolved "http://npm.byted.org/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+history@^4.7.2:
+  version "4.7.2"
+  resolved "http://npm.byted.org/history/-/history-4.7.2.tgz#22b5c7f31633c5b8021c7f4a8a954ac139ee8d5b"
+  dependencies:
+    invariant "^2.2.1"
+    loose-envify "^1.2.0"
+    resolve-pathname "^2.2.0"
+    value-equal "^0.4.0"
+    warning "^3.0.0"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "http://npm.byted.org/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -3073,6 +3149,10 @@ hmac-drbg@^1.0.0:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
+
+hoist-non-react-statics@^2.5.0:
+  version "2.5.5"
+  resolved "http://npm.byted.org/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -3319,7 +3399,27 @@ interpret@^1.0.0:
   version "1.1.0"
   resolved "http://npm.byted.org/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
-invariant@^2.2.2:
+intl-format-cache@^2.0.5:
+  version "2.1.0"
+  resolved "http://npm.byted.org/intl-format-cache/-/intl-format-cache-2.1.0.tgz#04a369fecbfad6da6005bae1f14333332dcf9316"
+
+intl-messageformat-parser@1.4.0:
+  version "1.4.0"
+  resolved "http://npm.byted.org/intl-messageformat-parser/-/intl-messageformat-parser-1.4.0.tgz#b43d45a97468cadbe44331d74bb1e8dea44fc075"
+
+intl-messageformat@^2.0.0, intl-messageformat@^2.1.0:
+  version "2.2.0"
+  resolved "http://npm.byted.org/intl-messageformat/-/intl-messageformat-2.2.0.tgz#345bcd46de630b7683330c2e52177ff5eab484fc"
+  dependencies:
+    intl-messageformat-parser "1.4.0"
+
+intl-relativeformat@^2.0.0:
+  version "2.1.0"
+  resolved "http://npm.byted.org/intl-relativeformat/-/intl-relativeformat-2.1.0.tgz#010f1105802251f40ac47d0e3e1a201348a255df"
+  dependencies:
+    intl-messageformat "^2.0.0"
+
+invariant@^2.0.0, invariant@^2.1.1, invariant@^2.2.1, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "http://npm.byted.org/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   dependencies:
@@ -4169,6 +4269,10 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+lit-html@^0.10.0:
+  version "0.10.2"
+  resolved "http://npm.byted.org/lit-html/-/lit-html-0.10.2.tgz#53c846afcf91bb1e6623179ef22e327ab8ac0e0e"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "http://npm.byted.org/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -4215,6 +4319,10 @@ locate-path@^2.0.0:
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
+
+lodash-es@^4.17.5:
+  version "4.17.10"
+  resolved "http://npm.byted.org/lodash-es/-/lodash-es-4.17.10.tgz#62cd7104cdf5dd87f235a837f0ede0e8e5117e05"
 
 lodash._reinterpolate@~3.0.0:
   version "3.0.0"
@@ -4273,7 +4381,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "http://npm.byted.org/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.3.0:
+"lodash@>=3.5 <5", lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.10"
   resolved "http://npm.byted.org/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -4285,7 +4393,7 @@ longest@^1.0.1:
   version "1.0.1"
   resolved "http://npm.byted.org/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
+loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1:
   version "1.4.0"
   resolved "http://npm.byted.org/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   dependencies:
@@ -4724,6 +4832,10 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
+normalize.css@^8.0.0:
+  version "8.0.0"
+  resolved "http://npm.byted.org/normalize.css/-/normalize.css-8.0.0.tgz#14ac5e461612538a4ce9be90a7da23f86e718493"
+
 npm-bundled@^1.0.1:
   version "1.0.3"
   resolved "http://npm.byted.org/npm-bundled/-/npm-bundled-1.0.3.tgz#7e71703d973af3370a9591bafe3a63aca0be2308"
@@ -5039,7 +5151,7 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "http://npm.byted.org/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
 
-path-to-regexp@^1.0.1:
+path-to-regexp@^1.0.1, path-to-regexp@^1.7.0:
   version "1.7.0"
   resolved "http://npm.byted.org/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
   dependencies:
@@ -5454,7 +5566,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.6.0:
+prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.2"
   resolved "http://npm.byted.org/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -5633,6 +5745,49 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "http://npm.byted.org/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
+react-intl@^2.4.0:
+  version "2.4.0"
+  resolved "http://npm.byted.org/react-intl/-/react-intl-2.4.0.tgz#66c14dc9df9a73b2fbbfbd6021726e80a613eb15"
+  dependencies:
+    intl-format-cache "^2.0.5"
+    intl-messageformat "^2.1.0"
+    intl-relativeformat "^2.0.0"
+    invariant "^2.1.1"
+
+react-redux@^5.0.7:
+  version "5.0.7"
+  resolved "http://npm.byted.org/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
+  dependencies:
+    hoist-non-react-statics "^2.5.0"
+    invariant "^2.0.0"
+    lodash "^4.17.5"
+    lodash-es "^4.17.5"
+    loose-envify "^1.1.0"
+    prop-types "^15.6.0"
+
+react-router-dom@^4.3.1:
+  version "4.3.1"
+  resolved "http://npm.byted.org/react-router-dom/-/react-router-dom-4.3.1.tgz#4c2619fc24c4fa87c9fd18f4fb4a43fe63fbd5c6"
+  dependencies:
+    history "^4.7.2"
+    invariant "^2.2.4"
+    loose-envify "^1.3.1"
+    prop-types "^15.6.1"
+    react-router "^4.3.1"
+    warning "^4.0.1"
+
+react-router@^4.3.1:
+  version "4.3.1"
+  resolved "http://npm.byted.org/react-router/-/react-router-4.3.1.tgz#aada4aef14c809cb2e686b05cee4742234506c4e"
+  dependencies:
+    history "^4.7.2"
+    hoist-non-react-statics "^2.5.0"
+    invariant "^2.2.4"
+    loose-envify "^1.3.1"
+    path-to-regexp "^1.7.0"
+    prop-types "^15.6.1"
+    warning "^4.0.1"
+
 react@^16.4.2:
   version "16.4.2"
   resolved "http://npm.byted.org/react/-/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
@@ -5734,6 +5889,13 @@ reduce-function-call@^1.0.1:
   resolved "http://npm.byted.org/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux@*, redux@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.byted.org/redux/-/redux-4.0.0.tgz#aa698a92b729315d22b34a0553d7e6533555cc03"
+  dependencies:
+    loose-envify "^1.1.0"
+    symbol-observable "^1.2.0"
 
 regenerate@^1.2.1:
   version "1.4.0"
@@ -5906,6 +6068,10 @@ resolve-dir@^1.0.0:
 resolve-from@^3.0.0:
   version "3.0.0"
   resolved "http://npm.byted.org/resolve-from/-/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748"
+
+resolve-pathname@^2.2.0:
+  version "2.2.0"
+  resolved "http://npm.byted.org/resolve-pathname/-/resolve-pathname-2.2.0.tgz#7e9ae21ed815fd63ab189adeee64dc831eefa879"
 
 resolve-url@^0.2.1:
   version "0.2.1"
@@ -6556,6 +6722,10 @@ sw-toolbox@^3.4.0:
     path-to-regexp "^1.0.1"
     serviceworker-cache-polyfill "^4.0.0"
 
+symbol-observable@^1.2.0:
+  version "1.2.0"
+  resolved "http://npm.byted.org/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+
 symbol-tree@^3.2.2:
   version "3.2.2"
   resolved "http://npm.byted.org/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
@@ -7038,6 +7208,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
+value-equal@^0.4.0:
+  version "0.4.0"
+  resolved "http://npm.byted.org/value-equal/-/value-equal-0.4.0.tgz#c5bdd2f54ee093c04839d71ce2e4758a6890abc7"
+
 vary@~1.1.2:
   version "1.1.2"
   resolved "http://npm.byted.org/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
@@ -7071,6 +7245,18 @@ walker@~1.0.5:
   resolved "http://npm.byted.org/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
   dependencies:
     makeerror "1.0.x"
+
+warning@^3.0.0:
+  version "3.0.0"
+  resolved "http://npm.byted.org/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
+  dependencies:
+    loose-envify "^1.0.0"
+
+warning@^4.0.1:
+  version "4.0.1"
+  resolved "http://npm.byted.org/warning/-/warning-4.0.1.tgz#66ce376b7fbfe8a887c22bdf0e7349d73d397745"
+  dependencies:
+    loose-envify "^1.0.0"
 
 watch@~0.18.0:
   version "0.18.0"
@@ -7250,6 +7436,140 @@ widest-line@^2.0.0:
 window-size@0.1.0:
   version "0.1.0"
   resolved "http://npm.byted.org/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
+
+wired-button@^0.7.0:
+  version "0.7.0"
+  resolved "http://npm.byted.org/wired-button/-/wired-button-0.7.0.tgz#66f273e52a4ac5a3d0b5c76121b7deaa6994ca64"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-card@^0.6.5:
+  version "0.6.5"
+  resolved "http://npm.byted.org/wired-card/-/wired-card-0.6.5.tgz#992488344154785ee684a2433cf05a9b68ee7fe1"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-checkbox@^0.7.0:
+  version "0.7.0"
+  resolved "http://npm.byted.org/wired-checkbox/-/wired-checkbox-0.7.0.tgz#9cf89e02eecb90d3394d24686e76505c5fb1dae0"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-combo@^0.7.1:
+  version "0.7.1"
+  resolved "http://npm.byted.org/wired-combo/-/wired-combo-0.7.1.tgz#ce0e786366deab34b19680931c114c59ab2cdec6"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-card "^0.6.5"
+    wired-item "^0.6.5"
+    wired-lib "^0.6.0"
+
+wired-elements@^0.7.1:
+  version "0.7.1"
+  resolved "http://npm.byted.org/wired-elements/-/wired-elements-0.7.1.tgz#cfb39a1c1b8912058445ba731f0b9003d166b6b8"
+  dependencies:
+    wired-button "^0.7.0"
+    wired-card "^0.6.5"
+    wired-checkbox "^0.7.0"
+    wired-combo "^0.7.1"
+    wired-icon-button "^0.7.0"
+    wired-input "^0.6.6"
+    wired-item "^0.6.5"
+    wired-lib "^0.6.0"
+    wired-listbox "^0.7.1"
+    wired-progress "^0.6.5"
+    wired-radio "^0.7.0"
+    wired-radio-group "^0.7.1"
+    wired-slider "^0.7.0"
+    wired-textarea "^0.6.5"
+    wired-toggle "^0.7.0"
+    wired-tooltip "^0.6.5"
+
+wired-icon-button@^0.7.0:
+  version "0.7.0"
+  resolved "http://npm.byted.org/wired-icon-button/-/wired-icon-button-0.7.0.tgz#60cbefe07434e8b279faa89b81096322d39af842"
+  dependencies:
+    "@material/mwc-icon" "^0.1.1"
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-input@^0.6.6:
+  version "0.6.6"
+  resolved "http://npm.byted.org/wired-input/-/wired-input-0.6.6.tgz#526a135542f45cc0b0394374f1865b33321a20fa"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-item@^0.6.5:
+  version "0.6.5"
+  resolved "http://npm.byted.org/wired-item/-/wired-item-0.6.5.tgz#5c0d3898a1fc3737f24e42787309cf2c0b43a015"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+
+wired-lib@^0.6.0:
+  version "0.6.0"
+  resolved "http://npm.byted.org/wired-lib/-/wired-lib-0.6.0.tgz#89b18cfa3353133e9e33d0cb2ce384668334fc76"
+
+wired-listbox@^0.7.1:
+  version "0.7.1"
+  resolved "http://npm.byted.org/wired-listbox/-/wired-listbox-0.7.1.tgz#548aac4fdfe6ff2a83d8afc4e08d96835b03a827"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-item "^0.6.5"
+    wired-lib "^0.6.0"
+
+wired-progress@^0.6.5:
+  version "0.6.5"
+  resolved "http://npm.byted.org/wired-progress/-/wired-progress-0.6.5.tgz#9575fb25a73fccda38eb60c802596456d6cfcfb4"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-radio-group@^0.7.1:
+  version "0.7.1"
+  resolved "http://npm.byted.org/wired-radio-group/-/wired-radio-group-0.7.1.tgz#fe70ce889e7e3157f2d51f225fc2e8f5c9e4af7f"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-radio@^0.7.0:
+  version "0.7.0"
+  resolved "http://npm.byted.org/wired-radio/-/wired-radio-0.7.0.tgz#bf7fc5ce985d6b4cb848196f7f93520b7d491675"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-slider@^0.7.0:
+  version "0.7.0"
+  resolved "http://npm.byted.org/wired-slider/-/wired-slider-0.7.0.tgz#0a5689e28294a73fd5905cf89f359ed2dd425d3a"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    "@polymer/polymer" "^3.0.2"
+    wired-lib "^0.6.0"
+
+wired-textarea@^0.6.5:
+  version "0.6.5"
+  resolved "http://npm.byted.org/wired-textarea/-/wired-textarea-0.6.5.tgz#9bdc214df95faa034466a84f9b073a82395264ed"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-toggle@^0.7.0:
+  version "0.7.0"
+  resolved "http://npm.byted.org/wired-toggle/-/wired-toggle-0.7.0.tgz#4b55854a0ae5abcb450b794d2f3a576103f7150e"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
+
+wired-tooltip@^0.6.5:
+  version "0.6.5"
+  resolved "http://npm.byted.org/wired-tooltip/-/wired-tooltip-0.6.5.tgz#5a121e3ba30ae099e57130dcf96f58d57f2d03ed"
+  dependencies:
+    "@polymer/lit-element" "^0.5.2"
+    wired-lib "^0.6.0"
 
 wordwrap@0.0.2:
   version "0.0.2"
