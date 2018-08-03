@@ -1,0 +1,3 @@
+export const SET_ARTICLES = 'ARTICLE/SET_ARTICLES';
+
+export const ADD_ARTICLE = 'ARTICLE/ADD_ARTICLE';
