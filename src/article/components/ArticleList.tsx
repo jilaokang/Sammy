@@ -9,7 +9,7 @@ import {FormattedMessage, FormattedDate} from 'react-intl';
 class ArticleListContainer extends React.Component<{ fetchArticles: any, articles: Articles }> {
     public test: any;
 
-    public async componentDidMount() {
+    public componentDidMount() {
         this.props.fetchArticles();
     }
 

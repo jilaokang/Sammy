@@ -15,9 +15,11 @@ export const addArticle = (article: Article) => ({
     payload: article
 });
 
-export const fetchArticles = async (dispatch: Dispatch) => {
-    const res = await Axios.get(`${COSAPIURL}config.json`);
-    let id = 0;
-    res.data.map(v => v.id = id++);
-    dispatch(setArticles(fromJS(res.data)));
+export const fetchArticles = async (dispatch: Dispatch, getState) => {
+    if (getState().get('articles').count() === 0) {
+        const res = await Axios.get(`${COSAPIURL}config.json`);
+        let id = 0;
+        res.data.map(v => v.id = id++);
+        dispatch(setArticles(fromJS(res.data)));
+    }
 };
