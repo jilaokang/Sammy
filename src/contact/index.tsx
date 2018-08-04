@@ -15,7 +15,7 @@ const ContactComponentCreator = (type: string) => (props) => {
             break;
     }
     return (
-        <section className="container animated fadeIn">
+        <section className="home-container animated fadeIn">
             <img src={img} style={{width: '400px', height: '500px', cursor: 'pointer'}} onClick={() => props.history.goBack()} />
         </section>
     );
