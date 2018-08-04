@@ -2,7 +2,7 @@
 
 @import "~animate.css/animate.min.css";
 
-@import "iconfont.css";
+@import "lib/css/iconfont.css";
 
 body {
     font-family: "Hannotate SC", "Hanzipen SC", "FangSong", "PingFang SC", serif;
