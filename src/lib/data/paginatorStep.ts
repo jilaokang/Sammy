@@ -1,0 +1,1 @@
+export const PAGINATOR_STEP = 4;

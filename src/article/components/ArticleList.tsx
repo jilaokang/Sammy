@@ -1,24 +1,21 @@
 import * as React from 'react';
 import {connect} from "react-redux";
 import {Articles} from "../@types";
-import {fetchArticles, setPage} from "../actions";
+import {fetchArticles, nextPage, prePage} from "../actions";
 import './index.css';
 import {WiredButton, WiredCard} from "../../lib/wiredElement";
 import {FormattedMessage, FormattedDate} from 'react-intl';
+import {PAGINATOR_STEP} from "../../lib/data/paginatorStep";
 
-class ArticleListContainer extends React.Component<{ fetchArticles: any, articles: Articles, setPage: any }, any> {
+class ArticleListContainer extends React.Component<{ fetchArticles: any, articles: Articles, toNextPage: any, page: number, toPrePage: any }, any> {
     public test: any;
-    public page: number = 1;
 
     public componentDidMount() {
         this.props.fetchArticles();
-        this.props.setPage(1);
     }
 
     public render() {
-        const { articles } = this.props;
-
-        console.log(articles);
+        const { articles, page, toNextPage, toPrePage } = this.props;
 
         return (
             <section className="a-container">
@@ -65,22 +62,29 @@ class ArticleListContainer extends React.Component<{ fetchArticles: any, article
                         ))
                     }
                 </main>
+
+                <section className="footer-pagination">
+                    {page !== 1 && <WiredButton onClick={() => toPrePage()} class="pre">上一页</WiredButton>}
+                    {Math.floor(articles.count() / PAGINATOR_STEP) === page && <WiredButton onClick={() => toNextPage()} class="next">下一页</WiredButton>}
+                </section>
             </section>
         );
     }
 }
 
 const getArticlesFromPage = (page, articles) => {
-    return articles.slice((page - 1) * 4, page * 4);
+    return articles.slice((page - 1) * PAGINATOR_STEP, page * PAGINATOR_STEP);
 };
 
 const mapStateToProps = (state) => ({
-    articles: getArticlesFromPage(state.get('articles').get('page'), state.get('articles').get('data'))
+    articles: getArticlesFromPage(state.get('articles').get('page'), state.get('articles').get('data')),
+    page: state.get('articles').get('page')
 });
 
 const mapDispatchToProps = (dispatch) => ({
     fetchArticles: () => dispatch(fetchArticles),
-    setPage: (page) => dispatch(setPage(page))
+    toNextPage: () => dispatch(nextPage()),
+    toPrePage: () => dispatch(prePage())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleListContainer);

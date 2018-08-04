@@ -50,3 +50,11 @@
     margin-left: auto;
     color: #818181;
 }
+
+.footer-pagination .pre {
+    float: left;
+}
+
+.footer-pagination .next {
+    float: right;
+}

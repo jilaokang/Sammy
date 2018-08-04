@@ -1,4 +1,4 @@
-import {SET_ARTICLES, SET_PAGE} from "./actionTypes";
+import {SET_ARTICLES, NEXT_PAGE, PRE_PAGE} from "./actionTypes";
 import {Articles} from "./@types";
 import Axios from "axios";
 import {fromJS} from "immutable";
@@ -10,9 +10,12 @@ export const setArticles = (articles: Articles) => ({
     payload: articles
 });
 
-export const setPage = (page: number) => ({
-    type: SET_PAGE,
-    payload: page
+export const nextPage = () => ({
+    type: NEXT_PAGE
+});
+
+export const prePage = () => ({
+    type: PRE_PAGE
 });
 
 export const fetchArticles = async (dispatch: Dispatch, getState) => {
