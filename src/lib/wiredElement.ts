@@ -23,4 +23,12 @@ const DEFAULT_RENDER_TYPE = 'div';
 
 const wiredComponentCreator = (element: string) => (props) => React.createElement(WIRED_ELEMENT_LIST.indexOf(element) >= 0 ? element : DEFAULT_RENDER_TYPE, props, props.children);
 
-export default wiredComponentCreator;
+export const WiredCard = wiredComponentCreator('wired-card');
+
+export const WiredCombo = wiredComponentCreator('wired-combo');
+
+export const WiredItem = wiredComponentCreator('wired-item');
+
+export const WiredIconButton = wiredComponentCreator('wired-icon-button');
+
+export const WiredButton = wiredComponentCreator('wired-button');

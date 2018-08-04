@@ -1,5 +1,35 @@
+@import "~normalize.css/normalize.css";
+
+@import "~animate.css/animate.min.css";
+
+@import "iconfont.css";
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    font-family: "Hannotate SC", "Hanzipen SC", "FangSong", "PingFang SC", serif;
+    font-size: 20px;
+}
+
+
+.deepskyblue {
+    color: deepskyblue;
+}
+
+.orange {
+    color: orange;
+}
+
+.green {
+    color: green;
+}
+
+.purple {
+    color: purple;
+}
+
+.red {
+    color: red;
+}
+
+.chocolate {
+    color: chocolate;
 }
