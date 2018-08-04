@@ -1,20 +1,11 @@
 import {List, Map} from "immutable";
 
-export interface IComment {
-    id: string;
-    parentId: string;
-    username: string;
-    body: string;
-}
-
 export interface IArticle {
-    id: string;
-    category: string;
     title: string;
-    body: string;
-    like: number;
     tags: List<string>;
-    comments: List<Comment>;
+    filename: string;
+    createdAt: number;
+    id: number;
 }
 
 export type Article = Map<keyof IArticle, any>;

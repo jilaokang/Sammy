@@ -9,6 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 import store from "./store";
 import {Home} from "./home";
 import ContactComponentCreator from "./contact";
+import {ArticleContainer} from "./article";
 
 ReactDOM.render(
     <IntlProvider locale={lang.locale} messages={lang.message}>
@@ -22,6 +23,7 @@ ReactDOM.render(
                             <Route path="/contact/wechat" component={ContactComponentCreator('wechat')} />
                         </Switch>
                     </Route>
+                    <Route path="/articles" component={ArticleContainer} />
                 </Switch>
             </BrowserRouter>
         </Provider>

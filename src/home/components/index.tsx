@@ -66,7 +66,7 @@ class Home extends React.Component<{history: History}> {
                         </section>
                         <FormattedMessage id="Home.base.welcome"/>
                         <section className="w-btn">
-                            <WiredButton><FormattedMessage id="Home.base.entry"/></WiredButton>
+                            <WiredButton onClick={() => this.props.history.push('/articles')}><FormattedMessage id="Home.base.entry"/></WiredButton>
                         </section>
                         <section className="button-contact-list" onClick={this.handleClick}>
                             <WiredIconButton class="iconfont icon-qq deepskyblue" name="qq" />

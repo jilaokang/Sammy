@@ -8,11 +8,15 @@ import {reducer as articleReducer} from './article';
 
 import {combineReducers} from "redux-immutable";
 
+import thunk from "redux-thunk";
+
 const reducer = combineReducers({
     home: homeReducer,
     articles: articleReducer
 });
 
 export default createStore(reducer, composeWithDevTools(
-    applyMiddleware()
+    applyMiddleware(
+        thunk
+    )
 ));
