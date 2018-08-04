@@ -1,5 +1,8 @@
 import reducer from './reducer';
 
+import Home from './components';
+
 export {
-    reducer
+    reducer,
+    Home
 };

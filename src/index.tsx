@@ -7,7 +7,7 @@ import './index.css';
 import lang from './lang';
 import registerServiceWorker from './registerServiceWorker';
 import store from "./store";
-import Home from "./article/components";
+import {Home} from "./article";
 
 ReactDOM.render(
     <IntlProvider locale={lang.locale} messages={lang.message}>
