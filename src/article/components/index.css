@@ -1,0 +1,50 @@
+.a-container {
+    display: flex;
+    flex-direction: column;
+    padding: 5vh 10vw;
+}
+
+.a-container header {
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    align-items: center;
+}
+
+.a-container header .title {
+    font-size: 35px;
+}
+
+.a-container header .button-list {
+    margin-left:auto;
+}
+
+.a-container header .button-list wired-button {
+    margin: 0 5px;
+    font-size: 15px;
+}
+
+.a-container main wired-card {
+    margin: 40px 0;
+    padding: 0 5vw 0 5vw;
+}
+
+.a-container main article {
+    cursor: pointer;
+}
+
+.a-container main article .excerpt {
+    font-size: 17px;
+    color: #818181;
+    line-height: 30px;
+}
+
+.a-container main article .footer {
+    display: flex;
+    flex-direction: row;
+}
+
+.a-container main article .footer p:last-child {
+    margin-left: auto;
+    color: #818181;
+}

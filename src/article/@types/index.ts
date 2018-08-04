@@ -6,6 +6,7 @@ export interface IArticle {
     filename: string;
     createdAt: number;
     id: number;
+    excerpt: string;
 }
 
 export type Article = Map<keyof IArticle, any>;

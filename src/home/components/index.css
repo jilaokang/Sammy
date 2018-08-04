@@ -1,4 +1,4 @@
-.container {
+.home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,7 +6,7 @@
     justify-content: center;
 }
 
-.w-card {
+.home-w-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,21 +15,21 @@
     padding: 10px 10px;
 }
 
-.w-card .w-combo {
+.home-w-card .home-w-combo {
     align-self: flex-end;
 }
 
-.w-card .words {
+.home-w-card .words {
     font-size: 40px;
     margin: 50px 0 30px 0;
     text-align: center;
 }
 
-.w-card .w-btn {
+.home-w-card .w-btn {
     margin-top: 30px;
 }
 
-.button-contact-list wired-icon-button {
+.home-button-contact-list wired-icon-button {
     font-size: 25px !important;
     margin: 50px 0.7vw 0 0.7vw;
 }

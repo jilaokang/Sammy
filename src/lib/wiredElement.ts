@@ -32,3 +32,5 @@ export const WiredItem = wiredComponentCreator('wired-item');
 export const WiredIconButton = wiredComponentCreator('wired-icon-button');
 
 export const WiredButton = wiredComponentCreator('wired-button');
+
+export const WiredListBox = wiredComponentCreator('wired-listbox');

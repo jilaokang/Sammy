@@ -1,0 +1,1 @@
+export const COSAPIURL = 'https://sammy-1252377356.cos.ap-beijing.myqcloud.com/';

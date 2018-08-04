@@ -1,6 +1,13 @@
 {
   "Home.base.welcome": "欢迎来到Sammy的博客",
-  "Home.base.words": "水光潋滟晴方好 山色空蒙雨亦奇",
+  "Home.base.words": "千里莺啼绿映红 水村山郭酒旗风",
   "Home.base.entry": "进去看下又不会死 ->",
-  "Home.base.footer.desc": "版权所有 © 2017 - 2018. 由诗亮强力驱动."
+  "Home.base.footer.desc": "版权所有 © 2017 - 2018. 由诗亮基于 React & TypeScript 强力驱动.",
+  "Article.header.home": "首页",
+  "Article.header.articles": "所有文章",
+  "Article.header.date": "时间线",
+  "Article.header.message": "留言板",
+  "Article.header.search": "搜索",
+  "Article.header.me": "关于",
+  "Article.footer.tags": "标签"
 }
