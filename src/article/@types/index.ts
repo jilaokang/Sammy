@@ -11,4 +11,4 @@ export interface IArticle {
 
 export type Article = Map<keyof IArticle, any>;
 
-export type Articles = List<Article>;
+export type Articles = Map<any, any>;

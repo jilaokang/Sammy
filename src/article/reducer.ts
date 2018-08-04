@@ -1,15 +1,17 @@
-import {List} from "immutable";
+import {List, Map} from "immutable";
 import {AnyAction} from "redux";
-import {ADD_ARTICLE, SET_ARTICLES} from "./actionTypes";
+import {SET_PAGE, SET_ARTICLES} from "./actionTypes";
+import {Articles} from "./@types";
 
-const articleInitState = List<{id: number, title: string}>([]);
+const articleInitState: Articles = Map({page: 1, data: List([])});
 
 export default (state=articleInitState, action: AnyAction) => {
+    console.log(state);
     switch (action.type) {
         case SET_ARTICLES:
-            return state.merge(action.payload);
-        case ADD_ARTICLE:
-            return state.insert(0, action.payload);
+            return state.set('data', action.payload);
+        case SET_PAGE:
+            return state.set('page', action.payload);
         default:
             return state;
     }

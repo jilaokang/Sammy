@@ -1,5 +1,5 @@
-import {ADD_ARTICLE, SET_ARTICLES} from "./actionTypes";
-import {Article, Articles} from "./@types";
+import {SET_ARTICLES, SET_PAGE} from "./actionTypes";
+import {Articles} from "./@types";
 import Axios from "axios";
 import {fromJS} from "immutable";
 import {Dispatch} from "redux";
@@ -10,13 +10,13 @@ export const setArticles = (articles: Articles) => ({
     payload: articles
 });
 
-export const addArticle = (article: Article) => ({
-    type: ADD_ARTICLE,
-    payload: article
+export const setPage = (page: number) => ({
+    type: SET_PAGE,
+    payload: page
 });
 
 export const fetchArticles = async (dispatch: Dispatch, getState) => {
-    if (getState().get('articles').count() === 0) {
+    if (getState().get('articles').get('data').count() === 0) {
         const res = await Axios.get(`${COSAPIURL}config.json`);
         let id = 0;
         res.data.map(v => v.id = id++);

@@ -24,9 +24,11 @@
     font-size: 15px;
 }
 
+
 .a-container main wired-card {
     margin: 40px 0;
     padding: 0 5vw 0 5vw;
+    width: 70vw;
 }
 
 .a-container main article {

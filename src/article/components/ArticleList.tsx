@@ -1,20 +1,24 @@
 import * as React from 'react';
 import {connect} from "react-redux";
 import {Articles} from "../@types";
-import {fetchArticles} from "../actions";
+import {fetchArticles, setPage} from "../actions";
 import './index.css';
 import {WiredButton, WiredCard} from "../../lib/wiredElement";
 import {FormattedMessage, FormattedDate} from 'react-intl';
 
-class ArticleListContainer extends React.Component<{ fetchArticles: any, articles: Articles }> {
+class ArticleListContainer extends React.Component<{ fetchArticles: any, articles: Articles, setPage: any }, any> {
     public test: any;
+    public page: number = 1;
 
     public componentDidMount() {
         this.props.fetchArticles();
+        this.props.setPage(1);
     }
 
     public render() {
         const { articles } = this.props;
+
+        console.log(articles);
 
         return (
             <section className="a-container">
@@ -66,12 +70,17 @@ class ArticleListContainer extends React.Component<{ fetchArticles: any, article
     }
 }
 
+const getArticlesFromPage = (page, articles) => {
+    return articles.slice((page - 1) * 4, page * 4);
+};
+
 const mapStateToProps = (state) => ({
-    articles: state.get('articles')
+    articles: getArticlesFromPage(state.get('articles').get('page'), state.get('articles').get('data'))
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchArticles: () => dispatch(fetchArticles)
+    fetchArticles: () => dispatch(fetchArticles),
+    setPage: (page) => dispatch(setPage(page))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleListContainer);
