@@ -17,7 +17,8 @@
     "strictNullChecks": false,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",

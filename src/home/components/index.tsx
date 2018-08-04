@@ -5,9 +5,15 @@ import './index.css';
 import {FormattedMessage} from 'react-intl';
 
 import lang from '../../lang';
+
 import {WiredButton, WiredCard, WiredCombo, WiredIconButton, WiredItem} from "../../lib/wiredElement";
 
-class Home extends React.Component {
+import {History} from 'history';
+
+import {autobind} from "core-decorators";
+
+@autobind()
+class Home extends React.Component<{history: History}> {
     public wiredComboSelectedListener: EventListenerOrEventListenerObject;
 
     constructor(args) {
@@ -24,6 +30,24 @@ class Home extends React.Component {
 
     public componentWillUnmount() {
         removeEventListener('selected', this.wiredComboSelectedListener);
+    }
+
+    public handleClick(v) {
+        const name = v.target.getAttribute('name');
+        switch (v.target.getAttribute('name')) {
+            case 'qq':
+            case 'wechat':
+                this.props.history.push(`/contact/${name}`);
+                break;
+            case 'weibo':
+                window.open('https://weibo.com/sammyliang97');
+                break;
+            case 'github':
+                window.open('https://github.com/Lurance');
+                break;
+
+
+        }
     }
 
     public render() {
@@ -44,19 +68,20 @@ class Home extends React.Component {
                         <section className="w-btn">
                             <WiredButton><FormattedMessage id="Home.base.entry"/></WiredButton>
                         </section>
-                        <section className="button-contact-list">
-                            <WiredIconButton class="iconfont icon-qq deepskyblue"/>
-                            <WiredIconButton class="iconfont icon-weibo orange"/>
-                            <WiredIconButton class="iconfont icon-weixin green"/>
-                            <WiredIconButton class="iconfont icon-github chocolate"/>
-                            <WiredIconButton class="iconfont icon-web-icon- purple"/>
-                            <WiredIconButton class="iconfont icon-youxiang red"/>
+                        <section className="button-contact-list" onClick={this.handleClick}>
+                            <WiredIconButton class="iconfont icon-qq deepskyblue" name="qq" />
+                            <WiredIconButton class="iconfont icon-weibo orange" name="weibo" />
+                            <WiredIconButton class="iconfont icon-weixin green" name="wechat" />
+                            <WiredIconButton class="iconfont icon-github chocolate" name="github" />
+                            <WiredIconButton class="iconfont icon-youxiang red" name="mail" />
+                            <WiredIconButton class="iconfont icon-wo deeppink" name="about" />
                         </section>
                     </section>
                 </WiredCard>
+                <br />
+                <p style={{textAlign: 'center'}}><FormattedMessage id="Home.base.footer.desc"/></p>
             </section>
-        )
-            ;
+        );
     }
 }
 
