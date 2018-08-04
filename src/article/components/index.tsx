@@ -40,8 +40,8 @@ class Home extends React.Component {
                     <section className='w-card'>
                         <section className='w-combo'>
                             <WiredCombo selected={lang.locale} tabindex="0">
-                                <WiredItem value="zh" text="中文" />
-                                <WiredItem value="en" text="English" />
+                                <WiredItem value="zh" text="中文（zh-cn）" />
+                                <WiredItem value="en" text="English（en-us）" />
                             </WiredCombo>
                         </section>
                         <br />
