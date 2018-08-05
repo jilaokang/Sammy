@@ -1,11 +1,12 @@
-import {List, Map} from "immutable";
-import {AnyAction} from "redux";
+import {fromJS} from "immutable";
+import {AnyAction, Reducer} from "redux";
 import {NEXT_PAGE, PRE_PAGE, SET_ARTICLES} from "./actionTypes";
-import {Articles} from "./@types";
+import {Articles, IArticleState} from "./@types";
 
-const articleInitState: Articles = Map({page: 1, data: List([])});
 
-export default (state=articleInitState, action: AnyAction) => {
+const articleInitState = fromJS({page: 1, data: []});
+
+const articleReducer: Reducer<IArticleState> =  (state=articleInitState, action: AnyAction) => {
     switch (action.type) {
         case SET_ARTICLES:
             return state.set('data', action.payload);
@@ -17,3 +18,5 @@ export default (state=articleInitState, action: AnyAction) => {
             return state;
     }
 };
+
+export default articleReducer;

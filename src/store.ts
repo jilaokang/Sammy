@@ -12,7 +12,7 @@ import thunk from "redux-thunk";
 
 const reducer = combineReducers({
     home: homeReducer,
-    articles: articleReducer
+    article: articleReducer
 });
 
 export default createStore(reducer, composeWithDevTools(

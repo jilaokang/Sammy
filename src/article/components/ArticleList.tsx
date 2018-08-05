@@ -77,8 +77,8 @@ const getArticlesFromPage = (page, articles) => {
 };
 
 const mapStateToProps = (state) => ({
-    articles: getArticlesFromPage(state.get('articles').get('page'), state.get('articles').get('data')),
-    page: state.get('articles').get('page')
+    articles: getArticlesFromPage(state.get('article').get('page'), state.get('article').get('data')),
+    page: state.get('article').get('page')
 });
 
 const mapDispatchToProps = (dispatch) => ({

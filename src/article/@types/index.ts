@@ -11,4 +11,6 @@ export interface IArticle {
 
 export type Article = Map<keyof IArticle, any>;
 
-export type Articles = Map<any, any>;
+export type Articles = List<Article>;
+
+export type IArticleState = Map<keyof {page: number, data: Articles}, any>;
