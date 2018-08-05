@@ -31,6 +31,10 @@
     width: 70vw;
 }
 
+.a-container main wired-card:hover {
+    transform: rotate(1deg);
+}
+
 .a-container main article {
     cursor: pointer;
 }
@@ -55,6 +59,14 @@
     float: left;
 }
 
+.footer-pagination .pre:hover {
+    transform: rotate(-5deg);
+}
+
 .footer-pagination .next {
     float: right;
+}
+
+.footer-pagination .next:hover {
+    transform: rotate(5deg);
 }
