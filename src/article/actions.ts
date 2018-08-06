@@ -1,5 +1,5 @@
-import {SET_ARTICLES, NEXT_PAGE, PRE_PAGE} from "./actionTypes";
-import {Articles} from "./@types";
+import {SET_ARTICLES, NEXT_PAGE, PRE_PAGE, SET_NOW_ARTICLE} from "./actionTypes";
+import {Article, Articles} from "./@types";
 import Axios from "axios";
 import {fromJS} from "immutable";
 import {Dispatch} from "redux";

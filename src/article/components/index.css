@@ -70,3 +70,7 @@
 .footer-pagination .next:hover {
     transform: rotate(5deg);
 }
+
+.markdown-body {
+    font-family: "Hannotate SC", "Hanzipen SC", "FangSong", "PingFang SC", serif!important;
+}

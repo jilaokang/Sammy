@@ -1,41 +1,33 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import {Articles} from "../@types";
-import {fetchArticles, nextPage, prePage} from "../actions";
+import {Article, Articles} from "../@types";
 import './index.css';
 import {WiredButton, WiredCard} from "../../lib/wiredElement";
 import {FormattedMessage, FormattedDate} from 'react-intl';
 import {PAGINATOR_STEP} from "../../lib/data/paginatorStep";
+import Header from "./Header";
+import {History} from 'history';
+import {autobind} from "core-decorators";
+import {fetchArticles, nextPage, prePage} from "../actions";
 
-class ArticleListContainer extends React.Component<{ fetchArticles: any, articles: Articles, toNextPage: any, page: number, toPrePage: any }, any> {
-    public test: any;
-
-    public componentDidMount() {
-        this.props.fetchArticles();
+@autobind()
+class ArticleListContainer extends React.Component<{ articles: Articles, toNextPage: any, page: number, toPrePage: any, history: History }, any> {
+    public handleArticleClick(article) {
+        this.props.history.push(`/articles/${article.get('title')}`);
     }
 
     public render() {
-        const { articles, page, toNextPage, toPrePage } = this.props;
+        const { articles, page, toNextPage, toPrePage, history } = this.props;
 
         return (
             <section className="a-container">
-                <header>
-                    <p className="title">Sammy</p>
-                    <section className="button-list">
-                        <WiredButton><i className="iconfont icon-home"/><FormattedMessage id="Article.header.home"/></WiredButton>
-                        <WiredButton><i className="iconfont icon-24"/><FormattedMessage id="Article.header.articles"/></WiredButton>
-                        <WiredButton><i className="iconfont icon-tubiaolunkuo-"/><FormattedMessage id="Article.header.date"/></WiredButton>
-                        <WiredButton><i className="iconfont icon-liuyan"/><FormattedMessage id="Article.header.message"/></WiredButton>
-                        <WiredButton><i className="iconfont icon-sousuo"/><FormattedMessage id="Article.header.search"/></WiredButton>
-                        <WiredButton><i className="iconfont icon-wo"/><FormattedMessage id="Article.header.me"/></WiredButton>
-                    </section>
-                </header>
+                <Header/>
 
                 <main>
                     {
                         articles.map(article => (
                             <WiredCard key={article.get('id')} elevation={2}>
-                                <article>
+                                <article onClick={this.handleArticleClick.bind(this, article)}>
                                     <h2>{article.get('title')}</h2>
                                     <p className="excerpt">
                                         {article.get('excerpt')}
@@ -47,7 +39,6 @@ class ArticleListContainer extends React.Component<{ fetchArticles: any, article
                                                 month="long"
                                                 day="numeric"
                                                 year="numeric"
-                                                hour="numeric"
                                             />
                                         </p>
                                         <p>
@@ -82,9 +73,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchArticles: () => dispatch(fetchArticles),
     toNextPage: () => dispatch(nextPage()),
-    toPrePage: () => dispatch(prePage())
+    toPrePage: () => dispatch(prePage()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleListContainer);

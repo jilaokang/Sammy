@@ -1,10 +1,10 @@
 import {fromJS} from "immutable";
 import {AnyAction, Reducer} from "redux";
-import {NEXT_PAGE, PRE_PAGE, SET_ARTICLES} from "./actionTypes";
-import {Articles, IArticleState} from "./@types";
+import {NEXT_PAGE, PRE_PAGE, SET_ARTICLES, SET_NOW_ARTICLE} from "./actionTypes";
+import {IArticleState} from "./@types";
 
 
-const articleInitState = fromJS({page: 1, data: []});
+const articleInitState = fromJS({page: 1, data: [], nowArticle: null});
 
 const articleReducer: Reducer<IArticleState> =  (state=articleInitState, action: AnyAction) => {
     switch (action.type) {
