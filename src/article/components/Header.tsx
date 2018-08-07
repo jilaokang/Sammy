@@ -1,4 +1,4 @@
-import {WiredButton} from "../../lib/wiredElement";
+import {WiredButton} from "react-wired-element";
 import {FormattedMessage} from "react-intl";
 import * as React from "react";
 

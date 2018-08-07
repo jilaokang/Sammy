@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from "react-redux";
 import {Articles} from "../@types";
 import './index.css';
-import {WiredButton, WiredCard} from "../../lib/wiredElement";
+import {WiredButton, WiredCard} from "react-wired-element";
 import {FormattedMessage, FormattedDate} from 'react-intl';
 import {PAGINATOR_STEP} from "../../lib/data/paginatorStep";
 import Header from "./Header";

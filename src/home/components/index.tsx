@@ -6,7 +6,7 @@ import {FormattedMessage} from 'react-intl';
 
 import lang from '../../lang';
 
-import {WiredButton, WiredCard, WiredCombo, WiredIconButton, WiredItem} from "../../lib/wiredElement";
+import {WiredButton, WiredCard, WiredCombo, WiredIconButton, WiredItem} from "react-wired-element";
 
 import {History} from 'history';
 
