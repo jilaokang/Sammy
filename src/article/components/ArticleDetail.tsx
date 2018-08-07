@@ -66,8 +66,7 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
     public render() {
         return (
             <section className="a-container">
-                <Header/>
-                <h1>{this.state.article && this.state.article.get('title')}</h1>
+                <Header title={this.state.article && this.state.article.get('title')}/>
                 <main>
                     <ReactMarkdown source={this.state.articleContent} className="markdown-body" renderers={{code: CodeBlock}} />
                 </main>

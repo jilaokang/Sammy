@@ -2,9 +2,9 @@ import {WiredButton} from "../../lib/wiredElement";
 import {FormattedMessage} from "react-intl";
 import * as React from "react";
 
-const Header = () => (
+const Header = ({ title='Sammy' }) => (
     <header>
-        <p className="title">Sammy</p>
+        <p className="title">{ title }</p>
         <section className="button-list">
             <WiredButton><i className="iconfont icon-home"/><FormattedMessage id="Article.header.home"/></WiredButton>
             <WiredButton><i className="iconfont icon-24"/><FormattedMessage id="Article.header.articles"/></WiredButton>
