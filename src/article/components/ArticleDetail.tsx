@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Header from "./Header";
-import {connect} from "react-redux";
 import {match} from "react-router";
 import * as ReactMarkdown from "react-markdown";
 import "github-markdown-css/github-markdown.css";
@@ -49,14 +48,6 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
         }
     }
 
-    public shouldComponentUpdate(props, state) {
-        if (props.articles.count() > 0 && !state.articleContent ) {
-            this.getArticleContent(state.article);
-            return true;
-        }
-        return true;
-    }
-
     public getArticleContent(article: Article) {
         Axios.get(`${COSAPIURL}${article.get('filename')}`)
             .then(res => this.setState({articleContent: res.data}));
@@ -75,9 +66,4 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
     }
 }
 
-const mapStateToProps = (state) => ({
-    articles: state.get('article').get('data')
-});
-
-// @ts-ignore
-export default connect(mapStateToProps, null)(ArticleDetail);
+export default ArticleDetail;

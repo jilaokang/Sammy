@@ -4,8 +4,9 @@ import ArticleList from "./ArticleList";
 import ArticleDetail from "./ArticleDetail";
 import {fetchArticles} from "../actions";
 import {connect} from "react-redux";
+import {Articles} from "../@types";
 
-class ArticleContainer extends React.Component<{match: match<{name: string}>, fetchArticles: any}> {
+class ArticleContainer extends React.Component<{match: match<{name: string}>, fetchArticles: any, articles: Articles}> {
     constructor(args) {
         super(args);
     }
@@ -19,12 +20,15 @@ class ArticleContainer extends React.Component<{match: match<{name: string}>, fe
         return (
             <section>
                 <Route path={`${match.url}`} exact={true} component={ArticleList} />
-                <Route path={`${match.url}/:name`} component={ArticleDetail} />
+                {this.props.articles.count() > 0 && <Route path={`${match.url}/:name`} render={(props) => <ArticleDetail {...props} articles={this.props.articles}/>} />}
             </section>
         );
     }
 }
 
+const mapArticlesToProps = (state) => ({
+    articles: state.get('article').get('data')
+});
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -32,4 +36,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(null, mapDispatchToProps)(ArticleContainer);
+export default connect(mapArticlesToProps, mapDispatchToProps)(ArticleContainer);

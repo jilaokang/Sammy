@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from "react-redux";
-import {Article, Articles} from "../@types";
+import {Articles} from "../@types";
 import './index.css';
 import {WiredButton, WiredCard} from "../../lib/wiredElement";
 import {FormattedMessage, FormattedDate} from 'react-intl';
