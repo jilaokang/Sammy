@@ -23,6 +23,7 @@
     "html-webpack-plugin": "2.29.0",
     "immutable": "^3.8.2",
     "jest": "22.4.2",
+    "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "normalize.css": "^8.0.0",
     "object-assign": "4.1.1",
@@ -69,6 +70,7 @@
     "@types/core-decorators": "^0.20.0",
     "@types/immutable": "^3.8.7",
     "@types/jest": "^23.3.1",
+    "@types/lodash": "^4.14.116",
     "@types/moment": "^2.13.0",
     "@types/node": "^10.5.5",
     "@types/react": "^16.4.7",
@@ -134,5 +136,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "homepage": "/Sammy"
 }

@@ -13,4 +13,4 @@ export type Article = Map<keyof IArticle, any>;
 
 export type Articles = List<Article>;
 
-export type IArticleState = Map<keyof {page: number, data: Articles}, any>;
+export type ArticleState = Map<keyof {page: number, data: Articles}, any>;
