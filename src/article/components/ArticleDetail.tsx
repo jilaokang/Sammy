@@ -9,6 +9,7 @@ import {autobind} from "core-decorators";
 import {Article, Articles} from "../@types";
 import Axios from "axios";
 import {COSAPIURL} from "../../lib/data/baseApiUrl";
+import {History} from 'history';
 
 class CodeBlock extends React.Component<{language: string, value: string}, any> {
     public render() {
@@ -23,7 +24,7 @@ class CodeBlock extends React.Component<{language: string, value: string}, any> 
 }
 
 @autobind()
-class ArticleDetail extends React.Component<{ match: match<{name: string}>, articles: Articles }, {articleContent: string, article: Article}> {
+class ArticleDetail extends React.Component<{ match: match<{name: string}>, articles: Articles, history: History }, {articleContent: string, article: Article}> {
     public static getDerivedStateFromProps(props, state) {
         if (props.articles.count() > 0) {
             const { name: title } = props.match.params;
@@ -55,9 +56,10 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
 
 
     public render() {
+        const {history} = this.props;
         return (
             <section className="a-container">
-                <Header title={this.state.article && this.state.article.get('title')}/>
+                <Header title={this.state.article && this.state.article.get('title')} history={history}/>
                 <main>
                     <ReactMarkdown source={this.state.articleContent} className="markdown-body" renderers={{code: CodeBlock}} />
                 </main>

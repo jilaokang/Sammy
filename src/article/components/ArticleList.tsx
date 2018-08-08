@@ -21,7 +21,7 @@ class ArticleListContainer extends React.Component<{ articles: Articles, toNextP
 
         return (
             <section className="a-container">
-                <Header/>
+                <Header history={history}/>
 
                 <main>
                     {
