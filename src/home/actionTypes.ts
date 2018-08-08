@@ -1,0 +1,1 @@
+export const SET_SHOW_TABS = 'HOME/SET_SHOW_TABS';
