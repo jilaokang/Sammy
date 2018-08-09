@@ -58,7 +58,7 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
     public render() {
         const {history} = this.props;
         return (
-            <section className="a-container">
+            <section className="a-container animated fadeIn">
                 <Header title={this.state.article && this.state.article.get('title')} history={history}/>
                 <main>
                     <ReactMarkdown source={this.state.articleContent} className="markdown-body" renderers={{code: CodeBlock}} />

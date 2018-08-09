@@ -20,7 +20,7 @@ class ArticleListContainer extends React.Component<{ articles: Articles, toNextP
         const { articles, page, toNextPage, toPrePage, history } = this.props;
 
         return (
-            <section className="a-container">
+            <section className="a-container animated fadeIn">
                 <Header history={history}/>
 
                 <main>
