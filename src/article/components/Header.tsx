@@ -47,7 +47,7 @@ class Header extends React.Component<{history: History, title?: string, fetchSho
                     {_.at(this.headerTabsMap, showTabs.toArray())}
                 </section>
                 <section className="hidden-md">
-                    <WiredButton onClick={() => this.setState((preState) => ({expand: !preState.expand}))}><span>Menu&nbsp;<span className="expand">&rsaquo;</span></span></WiredButton>
+                    <WiredButton onClick={() => this.setState((preState) => ({expand: !preState.expand}))}><span><FormattedMessage id="Article.header.menu" />&nbsp;<span className="expand">&rsaquo;</span></span></WiredButton>
                     <section className="to-expand">
                         {expand && _.at(this.headerTabsMap, showTabs.toArray())}
                     </section>
