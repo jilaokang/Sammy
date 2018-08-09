@@ -36,13 +36,13 @@ class Header extends React.Component<{history: History, title?: string, fetchSho
     }
 
     public render() {
-        const {title = 'Sammy', showTabs} = this.props;
+        const {title = 'Sammy', showTabs, history} = this.props;
 
         const { expand } = this.state;
 
         return (
             <header>
-                <p className="title">{ title }</p>
+                <p className="title" onClick={() => history.goBack()}>{ title }</p>
                 <section className="button-list hidden-sm">
                     {_.at(this.headerTabsMap, showTabs.toArray())}
                 </section>

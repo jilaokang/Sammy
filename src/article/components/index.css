@@ -13,6 +13,10 @@
 
 .a-container header .title {
     font-size: 35px;
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    overflow: auto;
 }
 
 .a-container header .button-list,
