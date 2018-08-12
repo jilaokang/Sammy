@@ -121,6 +121,9 @@
     .a-container main article .footer p:last-child {
         color: #818181;
         margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
         width: 70vw;
     }
 }
