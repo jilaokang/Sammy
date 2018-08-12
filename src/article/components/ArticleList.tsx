@@ -8,7 +8,7 @@ import {PAGINATOR_STEP} from "../../lib/data/paginatorStep";
 import Header from "./Header";
 import {History} from 'history';
 import {autobind} from "core-decorators";
-import {fetchArticles, nextPage, prePage} from "../actions";
+import {nextPage, prePage} from "../actions";
 
 @autobind()
 class ArticleListContainer extends React.Component<{ articles: Articles, toNextPage: any, page: number, toPrePage: any, history: History }, any> {
