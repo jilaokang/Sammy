@@ -10,6 +10,8 @@ import {Article, Articles} from "../@types";
 import Axios from "axios";
 import {COSAPIURL} from "../../lib/data/baseApiUrl";
 import {History} from 'history';
+import { WiredButton } from 'react-wired-element';
+import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 
 class CodeBlock extends React.Component<{language: string, value: string}, any> {
     public render() {
@@ -24,14 +26,11 @@ class CodeBlock extends React.Component<{language: string, value: string}, any> 
 }
 
 @autobind()
-class ArticleDetail extends React.Component<{ match: match<{name: string}>, articles: Articles, history: History }, {articleContent: string, article: Article}> {
+class ArticleDetail extends React.Component<{ match: match<{name: string}>, articles: Articles, history: History, intl: InjectedIntl }, {articleContent: string, article: Article}> {
     public static getDerivedStateFromProps(props, state) {
-        if (props.articles.count() > 0) {
-            const { name: title } = props.match.params;
-            const article =  props.articles.find(a => a.get('title') === title);
-            return {article};
-        }
-        return null;
+        const { name: title } = props.match.params;
+        const article =  props.articles.find(a => a.get('title') === title);
+        return {article};
     }
 
     constructor(args) {
@@ -49,11 +48,30 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
         }
     }
 
+    public componentDidUpdate(preProps, preState) {
+        const { article } = this.state;
+        if (article !== preState.article) {
+            this.getArticleContent(article);
+        }
+    }
+
     public getArticleContent(article: Article) {
         Axios.get(`${COSAPIURL}${article.get('filename')}`)
             .then(res => this.setState({articleContent: res.data}));
     }
 
+    public handleArticleGo(isPre=true) {
+        const { article: nowArticle } = this.state;
+        const { history, articles } = this.props;
+        const newId = isPre ? nowArticle.get('id') - 1 : nowArticle.get('id') + 1;
+        if (newId > articles.count() || newId < 1) {
+            const msg = this.props.intl.formatMessage({id: 'Article.base.noneArticle'});
+            alert(msg);
+            return;
+        }
+        const newArticle = this.props.articles.find(a => a.get('id') === (isPre ? nowArticle.get('id') - 1 : nowArticle.get('id') + 1));
+        history.push(`/articles/${newArticle.get('title')}`);
+    }
 
     public render() {
         const {history} = this.props;
@@ -63,9 +81,14 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
                 <main>
                     <ReactMarkdown source={this.state.articleContent} className="markdown-body" renderers={{code: CodeBlock}} />
                 </main>
+
+                <section className="footer-article-go">
+                    <WiredButton class="pre" onClick={this.handleArticleGo.bind(this, true)}><FormattedMessage id="Article.base.preArticle" /></WiredButton>
+                    <WiredButton class="next" onClick={this.handleArticleGo.bind(this, false)}><FormattedMessage id="Article.base.nextArticle" /></WiredButton>
+                </section>
             </section>
         );
     }
 }
 
-export default ArticleDetail;
+export default injectIntl(ArticleDetail);

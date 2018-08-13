@@ -21,8 +21,6 @@ export const prePage = () => ({
 export const fetchArticles = async (dispatch: Dispatch, getState) => {
     if (getState().get('article').get('data').count() === 0) {
         const res = await Axios.get(`${COSAPIURL}config.json`);
-        let id = 0;
-        res.data.map(v => v.id = id++);
         dispatch(setArticles(fromJS(res.data)));
     }
 };

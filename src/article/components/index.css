@@ -64,20 +64,28 @@
     margin-left: auto;
 }
 
-.footer-pagination .pre {
+.footer-pagination .pre,
+.footer-article-go .pre {
     float: left;
 }
 
-.footer-pagination .pre:hover {
+.footer-pagination .pre:hover,
+.footer-article-go .pre:hover {
     transform: rotate(-5deg);
 }
 
-.footer-pagination .next {
+.footer-pagination .next,
+.footer-article-go .next {
     float: right;
 }
 
-.footer-pagination .next:hover {
+.footer-pagination .next:hover,
+.footer-article-go .next:hover {
     transform: rotate(5deg);
+}
+
+.footer-article-go {
+    margin-top: 5vh;
 }
 
 .markdown-body {
@@ -97,6 +105,7 @@
     z-index: 999;
     background: #ffffff;
 }
+
 
 
 @media (min-width: 576px) {

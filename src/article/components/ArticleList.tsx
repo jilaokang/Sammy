@@ -39,6 +39,7 @@ class ArticleListContainer extends React.Component<{ articles: Articles, toNextP
                                                 month="long"
                                                 day="numeric"
                                                 year="numeric"
+                                                hour="numeric"
                                             />
                                         </p>
                                         <p>

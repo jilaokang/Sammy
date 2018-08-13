@@ -45,7 +45,9 @@ class Home extends React.Component<{history: History}> {
             case 'github':
                 window.open('https://github.com/Lurance');
                 break;
-
+            case 'mail':
+                location.href = 'mailto:sammyliang97@gmail.com';
+                break;
 
         }
     }

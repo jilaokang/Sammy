@@ -10,5 +10,8 @@
   "Article.header.message": "Message Box",
   "Article.header.search": "Search",
   "Article.header.me": "About me",
-  "Article.footer.tags": "Tags"
+  "Article.footer.tags": "Tags",
+  "Article.base.nextArticle": "Next Article",
+  "Article.base.preArticle": "Previous Article",
+  "Article.base.noneArticle": "Not Any More Article yet!"
 }

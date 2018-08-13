@@ -10,5 +10,8 @@
   "Article.header.message": "留言板",
   "Article.header.search": "搜索",
   "Article.header.me": "关于",
-  "Article.footer.tags": "标签"
+  "Article.footer.tags": "标签",
+  "Article.base.nextArticle": "下一篇文章",
+  "Article.base.preArticle": "上一篇文章",
+  "Article.base.noneArticle": "没有多余的文章啦"
 }
