@@ -4,6 +4,8 @@ import qqImg from '../static/qq.png';
 
 import wechatImg from '../static/wechat.png';
 
+import "./index.css";
+
 const ContactComponentCreator = (type: string) => (props) => {
     let img;
     switch (type) {
@@ -16,7 +18,7 @@ const ContactComponentCreator = (type: string) => (props) => {
     }
     return (
         <section className="home-container animated fadeIn">
-            <img src={img} style={{width: '90vw', height: '500px', cursor: 'pointer'}} onClick={() => props.history.goBack()} />
+            <img src={img} onClick={() => props.history.goBack()} />
         </section>
     );
 
