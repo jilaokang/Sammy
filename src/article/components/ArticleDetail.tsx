@@ -12,6 +12,7 @@ import {COSAPIURL} from "../../lib/data/baseApiUrl";
 import {History} from 'history';
 import { WiredButton } from 'react-wired-element';
 import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
+import Zmage from 'react-zmage';
 
 class CodeBlock extends React.Component<{language: string, value: string}, any> {
     public render() {
@@ -21,6 +22,15 @@ class CodeBlock extends React.Component<{language: string, value: string}, any> 
             <SyntaxHighlighter language={language} style={atomOneLight}>
                 {value}
             </SyntaxHighlighter>
+        );
+    }
+}
+
+class ImageBlock extends React.Component<{alt: string, src: string}, any> {
+    public render() {
+        const { alt, src } = this.props;
+        return (
+            <Zmage src={src} alt={alt} />
         );
     }
 }
@@ -80,7 +90,11 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
             <section className="a-container animated fadeIn">
                 <Header title={this.state.article && this.state.article.get('title')} history={history}/>
                 <main>
-                    <ReactMarkdown source={this.state.articleContent} className="markdown-body" renderers={{code: CodeBlock}} />
+                    <ReactMarkdown
+                        source={this.state.articleContent}
+                        className="markdown-body"
+                        renderers={{code: CodeBlock, image: ImageBlock}}
+                    />
                 </main>
 
                 <section className="footer-article-go">
