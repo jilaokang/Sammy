@@ -60,7 +60,7 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
             .then(res => this.setState({articleContent: res.data}));
     }
 
-    public handleArticleGo(isPre=true) {
+    public handleArticleJump(isPre=true) {
         const { article: nowArticle } = this.state;
         const { history, articles } = this.props;
         const newId = isPre ? nowArticle.get('id') - 1 : nowArticle.get('id') + 1;
@@ -70,6 +70,7 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
             return;
         }
         const newArticle = this.props.articles.find(a => a.get('id') === (isPre ? nowArticle.get('id') - 1 : nowArticle.get('id') + 1));
+        window.scrollTo(0,0);
         history.push(`/articles/${newArticle.get('title')}`);
     }
 
@@ -83,8 +84,8 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
                 </main>
 
                 <section className="footer-article-go">
-                    <WiredButton class="pre" onClick={this.handleArticleGo.bind(this, true)}><FormattedMessage id="Article.base.preArticle" /></WiredButton>
-                    <WiredButton class="next" onClick={this.handleArticleGo.bind(this, false)}><FormattedMessage id="Article.base.nextArticle" /></WiredButton>
+                    <WiredButton class="pre" onClick={this.handleArticleJump.bind(this, true)}><FormattedMessage id="Article.base.preArticle" /></WiredButton>
+                    <WiredButton class="next" onClick={this.handleArticleJump.bind(this, false)}><FormattedMessage id="Article.base.nextArticle" /></WiredButton>
                 </section>
             </section>
         );
