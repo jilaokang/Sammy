@@ -13,6 +13,8 @@ export interface IComment {
     id: number;
     username: string;
     comment: string;
+    date: number;
+    to?: string;
     children?: Comments;
 }
 

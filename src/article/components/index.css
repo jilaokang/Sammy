@@ -110,6 +110,22 @@
     font-size: 35px;
 }
 
+.comment .comment-list {
+    margin-bottom: 10vh;
+}
+
+.comment .comment-list .comment-list-child {
+    transform: translateX(5vw)
+}
+
+.comment .comment-list .comment-list-child::before {
+}
+
+.comment .comment-date {
+    font-size: 15px;
+    color: #a8a8a8;
+    margin-left: 1vw;
+}
 
 @media (min-width: 576px) {
     .hidden-md {
