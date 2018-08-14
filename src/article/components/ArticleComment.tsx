@@ -7,8 +7,13 @@ import { FormattedMessage, FormattedDate } from 'react-intl';
 import { autobind } from "core-decorators";
 
 async function getComment(filename: string) {
-    const res = await Axios.get<Comments>(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`);
-    return fromJS(res.data);
+    try {
+        const res = await Axios.get<Comments>(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`);
+        return fromJS(res.data);
+    } catch (err) {
+        return null;
+    }
+    
 }
 
 @autobind()
@@ -23,7 +28,7 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
     public componentDidMount() {
         const { article } = this.props;
         getComment(article.get('filename'))
-            .then(data => this.setState({ comments: data }));
+            .then(data => data && this.setState({ comments: data }));
     }
 
     public renderComments(comments: Comments) {
