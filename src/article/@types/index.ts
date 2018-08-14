@@ -14,7 +14,7 @@ export interface IComment {
     username: string;
     comment: string;
     date: number;
-    to?: string;
+    father?: Comment;
     children?: Comments;
 }
 

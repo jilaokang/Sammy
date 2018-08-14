@@ -118,13 +118,28 @@
     transform: translateX(5vw)
 }
 
-.comment .comment-list .comment-list-child::before {
+.comment wired-textarea {
+    width: 100%;
 }
 
-.comment .comment-date {
+.comment .comment-date,
+.comment .comment-replay {
     font-size: 15px;
     color: #a8a8a8;
     margin-left: 1vw;
+}
+
+.comment .comment-replay {
+    float: right;
+    cursor: pointer;
+}
+
+.comment .comment-replay:hover {
+    color: deepskyblue;
+}
+
+.comment .comment-list-child .comment-replay {
+    transform: translateX(-5vw)
 }
 
 @media (min-width: 576px) {
