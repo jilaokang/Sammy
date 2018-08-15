@@ -106,7 +106,51 @@
     background: #ffffff;
 }
 
+.comment .header {
+    width: 100%;
+    font-size: 35px;
+    display: inline-block;
+}
 
+.comment .header .header-comment-reply {
+    font-size: 15px;
+    color: #a8a8a8;
+    line-height: 40px;
+}
+
+.comment .comment-list {
+    margin-bottom: 10vh;
+}
+
+.comment .comment-list .comment-list-child {
+    transform: translateX(5vw)
+}
+
+.comment wired-textarea {
+    width: 100%;
+}
+
+.comment .comment-date,
+.comment .comment-reply {
+    font-size: 15px;
+    color: #a8a8a8;
+    margin-left: 1vw;
+}
+
+.comment .comment-reply,
+.comment .header .header-comment-reply {
+    float: right;
+    cursor: pointer;
+}
+
+.comment .comment-reply:hover,
+.comment .header .header-comment-reply:hover {
+    color: deepskyblue;
+}
+
+.comment .comment-list-child .comment-reply {
+    transform: translateX(-5vw)
+}
 
 @media (min-width: 576px) {
     .hidden-md {

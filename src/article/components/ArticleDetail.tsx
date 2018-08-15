@@ -13,6 +13,7 @@ import {History} from 'history';
 import { WiredButton } from 'react-wired-element';
 import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 import Zmage from 'react-zmage';
+import ArticleComment from './ArticleComment';
 
 class CodeBlock extends React.Component<{language: string, value: string}, any> {
     public render() {
@@ -85,7 +86,8 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
     }
 
     public render() {
-        const {history} = this.props;
+        const { history } = this.props;
+        const { article } = this.state;
         return (
             <section className="a-container animated fadeIn">
                 <Header title={this.state.article && this.state.article.get('title')} history={history}/>
@@ -96,6 +98,8 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
                         renderers={{code: CodeBlock, image: ImageBlock}}
                     />
                 </main>
+
+                <ArticleComment article={article} />
 
                 <section className="footer-article-go">
                     <WiredButton class="pre" onClick={this.handleArticleJump.bind(this, true)}><FormattedMessage id="Article.base.preArticle" /></WiredButton>
