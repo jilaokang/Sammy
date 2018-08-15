@@ -3,7 +3,7 @@ import { Article, Comments, Comment } from '../@types';
 import Axios from 'axios';
 import { COSAPIURL_COMMENTS } from '../../lib/data/baseApiUrl';
 import { fromJS } from 'immutable';
-import { FormattedMessage, FormattedDate } from 'react-intl';
+import { FormattedMessage, FormattedDate, injectIntl, InjectedIntl } from 'react-intl';
 import { autobind } from "core-decorators";
 import { WiredTextarea, WiredInput, WiredButton } from 'react-wired-element';
 
@@ -39,15 +39,16 @@ const putComments = async (filename: string, rawData: any) => {
 };
 
 @autobind()
-class ArticleComment extends React.Component<{article: Article}, {comments: Comments, replay: boolean, replayComment: Comment, nickname: string, rawData: any}> {
+class ArticleComment extends React.Component<{article: Article, intl: InjectedIntl}, {comments: Comments, reply: boolean, replyComment: Comment, nickname: string, rawData: any}> {
+    public REPLAY: string = this.props.intl.formatMessage({ id: 'Article.comments.reply' });
     constructor(args) {
         super(args);
         const initNickname = localStorage.getItem('nickname') || '';
         this.state = {
             comments: null,
             rawData: null,
-            replay: false,
-            replayComment: null,
+            reply: false,
+            replyComment: null,
             nickname: initNickname
         };
     }
@@ -71,46 +72,46 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
             .then(data => data && this.setState({ ...data }));
     }
 
-    public handleReplay(comment: Comment) {
+    public handleReply(comment: Comment) {
         window.scrollTo(0, document.body.scrollHeight);
         this.setState({
-            replayComment: comment,
-            replay: true
+            replyComment: comment,
+            reply: true
         });
     }
 
-    public handleMainReplay() {
+    public handleMainReply() {
         window.scrollTo(0, document.body.scrollHeight);
         this.setState({
-            replay: true,
-            replayComment: null
+            reply: true,
+            replyComment: null
         });
     }
 
     public handleSubmit() {
-        const { nickname, replayComment, rawData } = this.state;
+        const { nickname, replyComment, rawData } = this.state;
         const comment = (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value;
-        if (replayComment) {
-            const replayId = replayComment.get('id');
-            const replayUsername = replayComment.get('username');
+        if (replyComment) {
+            const replyId = replyComment.get('id');
+            const replyUsername = replyComment.get('username');
             const needPushData = {
                 id: Math.floor(Math.random() * 1000000),
                 father: {
-                    id: replayId,
-                    username: replayUsername
+                    id: replyId,
+                    username: replyUsername
                 },
                 username: nickname,
                 date: Date.now(),
                 comment
             };
             rawData.map(cm => {
-                if (replayId === cm.id) {
+                if (replyId === cm.id) {
                     cm.children = [];
                     cm.children.push(needPushData);
                     return cm;
                 } else if (cm.children) {
                     return cm.children.map(c => {
-                        if (c.id === replayId) {
+                        if (c.id === replyId) {
                             cm.children.push(needPushData);
                             return cm;
                         }
@@ -142,13 +143,17 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
             const fromUsername = c.get('username');
             if (c.get('father')) {
                 const toUsername = c.get('father').get('username');
-                commentTitle = <span><span className={fromUsername === 'Sammy' ? 'deeppink' : ''}>{fromUsername}</span> 回复 <span className={toUsername === 'Sammy' ? 'deeppink' : ''}>{toUsername}</span></span>;
+                commentTitle = <span>
+                    <span className={fromUsername === 'Sammy' ? 'deeppink' : 'deepskyblue'}>{fromUsername}</span>&nbsp;
+                        {this.REPLAY}&nbsp;&nbsp;
+                    <span className={toUsername === 'Sammy' ? 'deeppink' : 'deepskyblue'}>{toUsername}</span>
+                </span>;
             } else {
                 commentTitle = <span>{fromUsername}</span>;
             }
             return (
                 <section key={c.get('id')} className={c.get('father') ? "comment-list-child" : "comment-list"}>
-                    <span className="deepskyblue">{commentTitle}</span>
+                    <span>{commentTitle}</span>
                     <span className="comment-date">
                         <FormattedDate
                             value={c.get('date')}
@@ -160,7 +165,7 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
                             second="numeric"
                         />
                     </span>
-                    <span className="comment-replay" onClick={this.handleReplay.bind(this, c)}>回复</span>
+                    <span className="comment-reply" onClick={this.handleReply.bind(this, c)}>{this.REPLAY}</span>
                     <p>{c.get('comment')}</p>
                     {c.get('children') && this.renderComments(c.get('children'))}
                 </section>
@@ -169,23 +174,23 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
     }
 
     public render() {
-        const { comments, replay, replayComment, nickname } = this.state;
+        const { comments, reply, replyComment, nickname } = this.state;
         return (
             <main className="comment">
                 <h2 className="header">
                     <FormattedMessage id="Article.base.comments" />
-                    <span className="header-comment-replay" onClick={this.handleMainReplay}>回复</span>
+                    <span className="header-comment-reply" onClick={this.handleMainReply}>{this.REPLAY}</span>
                 </h2>
                 <hr />
                 {comments && this.renderComments(comments)}
-                {replay && <WiredTextarea rows={5} placeholder={`${nickname} 回复 ${replayComment ? replayComment.get('username') : 'Sammy'}`} />}
+                {reply && <WiredTextarea rows={5} placeholder={`${nickname} ${this.REPLAY} ${replyComment ? replyComment.get('username') : 'Sammy'}`} />}
                 <br /><br />
-                {replay && (
+                {reply && (
                     <section>
-                        <span>昵称：</span>
+                        <span><FormattedMessage id="Article.comments.nickname" />：</span>
                         <WiredInput required={true} max='20' name='username' value={nickname} />
                         &nbsp;&nbsp;&nbsp;
-                        <WiredButton onClick={this.handleSubmit}>提交</WiredButton>
+                        <WiredButton onClick={this.handleSubmit}><FormattedMessage id="Article.comments.submit" /></WiredButton>
                     </section>
                 )}
             </main>
@@ -193,4 +198,4 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
     }
 }
 
-export default ArticleComment;
+export default injectIntl(ArticleComment);

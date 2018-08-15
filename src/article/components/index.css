@@ -112,7 +112,7 @@
     display: inline-block;
 }
 
-.comment .header .header-comment-replay {
+.comment .header .header-comment-reply {
     font-size: 15px;
     color: #a8a8a8;
     line-height: 40px;
@@ -131,24 +131,24 @@
 }
 
 .comment .comment-date,
-.comment .comment-replay {
+.comment .comment-reply {
     font-size: 15px;
     color: #a8a8a8;
     margin-left: 1vw;
 }
 
-.comment .comment-replay,
-.comment .header .header-comment-replay {
+.comment .comment-reply,
+.comment .header .header-comment-reply {
     float: right;
     cursor: pointer;
 }
 
-.comment .comment-replay:hover,
-.comment .header .header-comment-replay:hover {
+.comment .comment-reply:hover,
+.comment .header .header-comment-reply:hover {
     color: deepskyblue;
 }
 
-.comment .comment-list-child .comment-replay {
+.comment .comment-list-child .comment-reply {
     transform: translateX(-5vw)
 }
 

@@ -14,5 +14,8 @@
   "Article.base.nextArticle": "下一篇文章",
   "Article.base.preArticle": "上一篇文章",
   "Article.base.noneArticle": "没有多余的文章啦",
-  "Article.base.comments": "评论"
+  "Article.base.comments": "评论",
+  "Article.comments.reply": "回复",
+  "Article.comments.nickname": "昵称",
+  "Article.comments.submit": "提交"
 }
