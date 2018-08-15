@@ -10,7 +10,7 @@ import * as enMessage from './locales/en.json';
 
 addLocaleData([...zh, ...en]);
 
-const DEFAULT_LANG: string = 'zh';
+const DEFAULT_LANG: string = 'en';
 
 const SUPPORT_LANG: string[] = [
     'zh',
