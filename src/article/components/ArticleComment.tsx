@@ -10,12 +10,21 @@ import { WiredTextarea, WiredInput, WiredButton } from 'react-wired-element';
 async function getComment(filename: string) {
     try {
         const res = await Axios.get<Comments>(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`);
+        const data = res.data || [];
         return {
             comments: fromJS(res.data),
-            rawData: res.data
+            rawData: data
         };
     } catch (err) {
-        return null;
+        createCommentFile(filename);
+        return false;
+    }
+}
+
+function createCommentFile(filename: string) {
+    try {
+        Axios.put(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`, []);
+    } catch (err) {
     }
 }
 
@@ -61,11 +70,20 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
     }
 
     public handleReplay(comment: Comment) {
+        window.scrollTo(0, document.body.scrollHeight);
         this.setState({
             replayComment: comment,
             replay: true
         });
        setTimeout(() =>  (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value = '');
+    }
+
+    public handleMainReplay() {
+        window.scrollTo(0, document.body.scrollHeight);
+        this.setState({
+            replay: true
+        });
+        setTimeout(() =>  (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value = '');
     }
 
     public handleSubmit() {
@@ -99,26 +117,31 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
                     });
                 }
             });
-            putComments(this.props.article.get('filename'), rawData);
-            this.setState({
-                comments: fromJS(rawData),
-                rawData
-            });
+        } else {
+            const needPushData = {
+                id: Math.floor(Math.random() * 1000000),
+                username: nickname,
+                date: Date.now(),
+                comment
+            };
+            rawData.push(needPushData);
         }
+        putComments(this.props.article.get('filename'), rawData);
+        this.setState({
+            comments: fromJS(rawData),
+            rawData
+        });
     }
 
     public renderComments(comments: Comments) {
         return comments.map(c => {
             let commentTitle;
+            const fromUsername = c.get('username');
             if (c.get('father')) {
                 const toUsername = c.get('father').get('username');
-                if (toUsername === 'Sammy') {
-                    commentTitle = <span>{c.get('username')} 回复 <span className="deeppink">Sammy</span></span>;
-                } else{
-                    commentTitle = <span>{c.get('username')} 回复 {toUsername}</span>;
-                }
+                commentTitle = <span><span className={fromUsername === 'Sammy' ? 'deeppink' : ''}>{fromUsername}</span> 回复 <span className={toUsername === 'Sammy' ? 'deeppink' : ''}>{toUsername}</span></span>;
             } else {
-                commentTitle = <span>{c.get('username')}</span>;
+                commentTitle = <span>{fromUsername}</span>;
             }
             return (
                 <section key={c.get('id')} className={c.get('father') ? "comment-list-child" : "comment-list"}>
@@ -146,10 +169,13 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
         const { comments, replay, replayComment } = this.state;
         return (
             <main className="comment">
-                <p className="header"><FormattedMessage id="Article.base.comments" /></p>
+                <h2 className="header">
+                    <FormattedMessage id="Article.base.comments" />
+                    <span className="header-comment-replay" onClick={this.handleMainReplay}>回复</span>
+                </h2>
                 <hr />
                 {comments && this.renderComments(comments)}
-                {replay && <WiredTextarea rows={5} placeholder={`回复${replayComment.get('username')}`} />}
+                {replay && <WiredTextarea rows={5} placeholder={`回复${replayComment ? replayComment.get('username') : 'Sammy'}`} />}
                 <br /><br />
                 {replay && (
                     <section>

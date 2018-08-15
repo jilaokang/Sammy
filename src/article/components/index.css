@@ -107,7 +107,15 @@
 }
 
 .comment .header {
+    width: 100%;
     font-size: 35px;
+    display: inline-block;
+}
+
+.comment .header .header-comment-replay {
+    font-size: 15px;
+    color: #a8a8a8;
+    line-height: 40px;
 }
 
 .comment .comment-list {
@@ -129,12 +137,14 @@
     margin-left: 1vw;
 }
 
-.comment .comment-replay {
+.comment .comment-replay,
+.comment .header .header-comment-replay {
     float: right;
     cursor: pointer;
 }
 
-.comment .comment-replay:hover {
+.comment .comment-replay:hover,
+.comment .header .header-comment-replay:hover {
     color: deepskyblue;
 }
 
