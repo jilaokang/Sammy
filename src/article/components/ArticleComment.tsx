@@ -7,46 +7,48 @@ import { FormattedMessage, FormattedDate } from 'react-intl';
 import { autobind } from "core-decorators";
 import { WiredTextarea, WiredInput, WiredButton } from 'react-wired-element';
 
-async function getComment(filename: string) {
+const getComment = async (filename: string) => {
     try {
         const res = await Axios.get<Comments>(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`);
-        const data = res.data || [];
+        const data = res.data;
+        console.log(data);
         return {
             comments: fromJS(res.data),
             rawData: data
         };
     } catch (err) {
         createCommentFile(filename);
-        return false;
+        return {
+            comments: fromJS([]),
+            rawData: []
+        };
     }
-}
+};
 
-function createCommentFile(filename: string) {
-    try {
-        Axios.put(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`, []);
-    } catch (err) {
-    }
-}
+const createCommentFile = async (filename: string) => {
+    Axios.put(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`, []);
+};
 
-async function putComments(filename, rawData) {
+const putComments = async (filename: string, rawData: any) => {
     try {
         const res = await Axios.put(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`, rawData);
         return true;
     } catch {
         return false;
     }
-}
+};
 
 @autobind()
 class ArticleComment extends React.Component<{article: Article}, {comments: Comments, replay: boolean, replayComment: Comment, nickname: string, rawData: any}> {
     constructor(args) {
         super(args);
+        const initNickname = localStorage.getItem('nickname') || '';
         this.state = {
             comments: null,
             rawData: null,
             replay: false,
             replayComment: null,
-            nickname: ''
+            nickname: initNickname
         };
     }
 
@@ -75,15 +77,14 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
             replayComment: comment,
             replay: true
         });
-       setTimeout(() =>  (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value = '');
     }
 
     public handleMainReplay() {
         window.scrollTo(0, document.body.scrollHeight);
         this.setState({
-            replay: true
+            replay: true,
+            replayComment: null
         });
-        setTimeout(() =>  (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value = '');
     }
 
     public handleSubmit() {
@@ -127,6 +128,8 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
             rawData.push(needPushData);
         }
         putComments(this.props.article.get('filename'), rawData);
+        localStorage.setItem('nickname', nickname);
+        (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value = '';
         this.setState({
             comments: fromJS(rawData),
             rawData
@@ -166,7 +169,7 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
     }
 
     public render() {
-        const { comments, replay, replayComment } = this.state;
+        const { comments, replay, replayComment, nickname } = this.state;
         return (
             <main className="comment">
                 <h2 className="header">
@@ -175,12 +178,12 @@ class ArticleComment extends React.Component<{article: Article}, {comments: Comm
                 </h2>
                 <hr />
                 {comments && this.renderComments(comments)}
-                {replay && <WiredTextarea rows={5} placeholder={`回复${replayComment ? replayComment.get('username') : 'Sammy'}`} />}
+                {replay && <WiredTextarea rows={5} placeholder={`${nickname} 回复 ${replayComment ? replayComment.get('username') : 'Sammy'}`} />}
                 <br /><br />
                 {replay && (
                     <section>
                         <span>昵称：</span>
-                        <WiredInput required={true} max='20' name='username' />
+                        <WiredInput required={true} max='20' name='username' value={nickname} />
                         &nbsp;&nbsp;&nbsp;
                         <WiredButton onClick={this.handleSubmit}>提交</WiredButton>
                     </section>
