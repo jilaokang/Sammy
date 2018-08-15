@@ -11,7 +11,6 @@ const getComment = async (filename: string) => {
     try {
         const res = await Axios.get<Comments>(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`);
         const data = res.data;
-        console.log(data);
         return {
             comments: fromJS(res.data),
             rawData: data
