@@ -179,4 +179,9 @@
         flex-direction: row;
         width: 70vw;
     }
+
+    .a-container header .hidden-md wired-button:first-child{
+        width: 65px;
+        height: 29px;
+    }
 }
