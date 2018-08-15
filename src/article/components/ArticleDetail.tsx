@@ -4,7 +4,7 @@ import {match} from "react-router";
 import * as ReactMarkdown from "react-markdown";
 import "github-markdown-css/github-markdown.css";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import {atomOneLight} from "react-syntax-highlighter/styles/hljs";
+import {atelierSulphurpoolLight} from "react-syntax-highlighter/styles/hljs";
 import {autobind} from "core-decorators";
 import {Article, Articles} from "../@types";
 import Axios from "axios";
@@ -20,7 +20,7 @@ class CodeBlock extends React.Component<{language: string, value: string}, any> 
         const { language, value } = this.props;
 
         return (
-            <SyntaxHighlighter language={language} style={atomOneLight}>
+            <SyntaxHighlighter language={language} style={atelierSulphurpoolLight}>
                 {value}
             </SyntaxHighlighter>
         );
