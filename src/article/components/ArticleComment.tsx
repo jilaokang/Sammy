@@ -54,8 +54,13 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
 
     public componentDidMount() {
         this.getComments();
-
         document.addEventListener('change', this.changeListener);
+    }
+
+    public componentDidUpdate(preProps, preState) {
+        if (!this.props.article.equals(preProps.article)) {
+            this.getComments();
+        }
     }
 
     public changeListener(ev) {

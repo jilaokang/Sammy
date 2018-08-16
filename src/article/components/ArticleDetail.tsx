@@ -41,7 +41,7 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
     public static getDerivedStateFromProps(props, state) {
         const { name: title } = props.match.params;
         const article =  props.articles.find(a => a.get('title') === title);
-        return {article};
+        return { article };
     }
 
     constructor(args) {
