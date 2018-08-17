@@ -25,6 +25,7 @@ class ArticleContainer extends React.Component<{match: match<{name: string}>, fe
         const { webPush, intl } = this.props;
         const nowArticles = this.props.articles.toJS();
         const diffArticles = _.differenceWith(nowArticles, this.oldArticles, _.isEqual);
+        this.oldArticles = nowArticles;
         if (diffArticles.length > 0) {
             let msg ='';
             if (this.oldArticles.length === 0) {
