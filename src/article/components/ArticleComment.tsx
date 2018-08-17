@@ -84,7 +84,7 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
         });
     }
 
-    public handleMainReply() {
+    public handleMainReply( ) {
         window.scrollTo(0, document.body.scrollHeight);
         this.setState({
             reply: true,
@@ -148,7 +148,7 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
             if (c.get('father')) {
                 const toUsername = c.get('father').get('username');
                 commentTitle = <span>
-                    <span className={fromUsername === 'Sammy' ? 'deeppink' : 'deepskyblue'}>{fromUsername}</span>&nbsp;
+                    <span className={fromUsername === 'Sammy' ? 'deeppink' : 'deepskyblue'}>{fromUsername}</span>&nbsp;&nbsp;
                         {this.REPLAY}&nbsp;&nbsp;
                     <span className={toUsername === 'Sammy' ? 'deeppink' : 'deepskyblue'}>{toUsername}</span>
                 </span>;

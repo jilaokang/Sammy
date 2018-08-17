@@ -5,7 +5,7 @@
 @import "lib/css/iconfont.css";
 
 body {
-    font-family: "Hannotate SC", "Hanzipen SC", "FangSong", "PingFang SC", serif;
+    font-family: Hannotate SC, Hanzipen SC, FangSong, PingFang SC, 华文细黑, 楷体，serif;
     font-size: 20px;
 }
 

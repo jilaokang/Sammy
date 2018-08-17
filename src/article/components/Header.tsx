@@ -11,6 +11,7 @@ import "./index.css";
 
 class Header extends React.Component<{history: History, title?: string, fetchShowTabs: any, showTabs: ShowTabs}, {expand: boolean}> {
     public headerTabsMap: {[key: string]: JSX.Element};
+    public autoScroller: any;
 
     constructor(args) {
         super(args);
@@ -34,34 +35,36 @@ class Header extends React.Component<{history: History, title?: string, fetchSho
     public componentDidMount() {
         this.props.fetchShowTabs();
 
-        function autoScrollTitle(lh, speed, delay){ 
+        const o = document.getElementById("title");
+
+        const autoScrollTitle = (lh, speed, delay) => {
             let t; 
             const oHeight = 40;
-            const o = document.getElementById("title");
             let preTop = 0;
-            o.scrollTop = 0; 
-            function start(){ 
+            o.scrollTop = 0;
+            const start =() =>{ 
                 t = setInterval(scrolling,speed); 
                 o.scrollTop += 1; 
-            } 
-            function scrolling(){ 
+            };
+            const scrolling = () => { 
                 if(o.scrollTop % lh !== 0 && o.scrollTop % (o.scrollHeight - oHeight-1) !== 0){
                     preTop = o.scrollTop;
                     o.scrollTop += 1;
                     if(preTop >= o.scrollHeight || preTop === o.scrollTop){
                         o.scrollTop = 0;
+                        clearInterval(t);
                     }
                 }else{
                     clearInterval(t); 
                     setTimeout(start,delay); 
                 }
-            } 
-            if (o.scrollHeight > 50) {
-                setTimeout(start,delay);
-            }
-        }
+            };
+            start();
+        };
 
-        autoScrollTitle(30, 30, 0);
+        if (o.scrollHeight > 50) {
+            autoScrollTitle(50, 50, 1);
+        }
     }
 
     public render() {
