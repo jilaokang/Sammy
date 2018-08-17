@@ -11,14 +11,13 @@ import {autobind} from "core-decorators";
 import {nextPage, prePage} from "../actions";
 
 @autobind()
-class ArticleListContainer extends React.Component<{ articles: Articles, toNextPage: any, page: number, toPrePage: any, history: History }, any> {
+class ArticleListContainer extends React.Component<{ articles: Articles, toNextPage: any, page: number, toPrePage: any, history: History, remainArticleNum: number }, any> {
     public handleArticleClick(article) {
         this.props.history.push(`/articles/${article.get('title')}`);
     }
 
     public render() {
-        const { articles, page, toNextPage, toPrePage, history } = this.props;
-
+        const { articles, page, toNextPage, toPrePage, history, remainArticleNum } = this.props;
         return (
             <section className="a-container animated fadeIn">
                 <Header history={history}/>
@@ -57,7 +56,7 @@ class ArticleListContainer extends React.Component<{ articles: Articles, toNextP
 
                 <section className="footer-pagination">
                     {page !== 1 && <WiredButton onClick={() => toPrePage()} class="pre">上一页</WiredButton>}
-                    {Math.floor(articles.count() / PAGINATOR_STEP) === page && <WiredButton onClick={() => toNextPage()} class="next">下一页</WiredButton>}
+                    {remainArticleNum > 0 && <WiredButton onClick={() => toNextPage()} class="next">下一页</WiredButton>}
                 </section>
             </section>
         );
@@ -70,6 +69,7 @@ const getArticlesFromPage = (page, articles) => {
 
 const mapStateToProps = (state) => ({
     articles: getArticlesFromPage(state.get('article').get('page'), state.get('article').get('data')),
+    remainArticleNum: state.get('article').get('data').count() - state.get('article').get('page') * PAGINATOR_STEP,
     page: state.get('article').get('page')
 });
 
