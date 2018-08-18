@@ -1,8 +1,8 @@
 {
-  "Home.base.welcome": "欢迎来到Sammy的博客",
+  "Home.base.welcome": "欢迎来到诗亮的博客",
   "Home.base.words": "千里莺啼绿映红 水村山郭酒旗风",
   "Home.base.entry": "进去看下又不会死 ->",
-  "Home.base.footer.desc": "版权所有 © 2018. 由诗亮基于 React & TypeScript 强力驱动.",
+  "Home.base.footer.desc": "版权所有 © {year}. 由诗亮基于 React & TypeScript 强力驱动.",
   "Article.header.menu": "菜单",
   "Article.header.home": "首页",
   "Article.header.articles": "所有文章",

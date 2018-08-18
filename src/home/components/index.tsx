@@ -12,6 +12,8 @@ import {History} from 'history';
 
 import {autobind} from "core-decorators";
 
+const NOW_YEAR = new Date().getFullYear();
+
 @autobind()
 class Home extends React.Component<{history: History}> {
     public wiredComboSelectedListener: EventListenerOrEventListenerObject;
@@ -81,7 +83,7 @@ class Home extends React.Component<{history: History}> {
                     </section>
                 </WiredCard>
                 <br />
-                <p style={{textAlign: 'center'}}><FormattedMessage id="Home.base.footer.desc"/></p>
+                <p style={{textAlign: 'center'}}><FormattedMessage id="Home.base.footer.desc" values={{year: NOW_YEAR}}/></p>
             </section>
         );
     }

@@ -2,7 +2,7 @@
   "Home.base.welcome": "Welcome to Sammy's Blog",
   "Home.base.words": "Just the Way You Are",
   "Home.base.entry": "Have a Look ->",
-  "Home.base.footer.desc": "Copyright © 2018. Powered By Sammy Liang Based on React & TypeScript.",
+  "Home.base.footer.desc": "Copyright © {year}. Powered By Sammy Liang Based on React & TypeScript.",
   "Article.header.menu": "Menu",
   "Article.header.home": "Home",
   "Article.header.articles": "All Articles",
