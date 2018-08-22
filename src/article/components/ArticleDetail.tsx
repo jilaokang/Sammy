@@ -10,18 +10,8 @@ import { COSAPIURL } from "../../lib/data/baseApiUrl";
 import { History } from 'history';
 import { WiredButton } from 'react-wired-element';
 import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
-import Zmage from 'react-zmage';
 import ArticleComment from './ArticleComment';
-import CodeBlock from './md_block/CodeBlock';
-
-class ImageBlock extends React.Component<{alt: string, src: string}, any> {
-    public render() {
-        const { alt, src } = this.props;
-        return (
-            <Zmage src={src} alt={alt} />
-        );
-    }
-}
+import { CodeBlock, ImageBlock } from './md_block';
 
 @autobind()
 class ArticleDetail extends React.Component<{ match: match<{name: string}>, articles: Articles, history: History, intl: InjectedIntl }, {articleContent: string, article: Article}> {
