@@ -10,7 +10,7 @@ import { COSAPIURL } from "../../lib/data/baseApiUrl";
 import { History } from 'history';
 import { WiredButton } from 'react-wired-element';
 import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
-import ArticleComment from './ArticleComment';
+import { ArticleComment, ArticleFooter } from './article';
 import { CodeBlock, ImageBlock } from './md_block';
 
 @autobind()
@@ -78,10 +78,7 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
 
                 <ArticleComment article={article} />
 
-                <section className="footer-article-go">
-                    <WiredButton class="pre" onClick={this.handleArticleJump.bind(this, true)}><FormattedMessage id="Article.base.preArticle" /></WiredButton>
-                    <WiredButton class="next" onClick={this.handleArticleJump.bind(this, false)}><FormattedMessage id="Article.base.nextArticle" /></WiredButton>
-                </section>
+                <ArticleFooter onArticleJump={this.handleArticleJump} />
             </section>
         );
     }
