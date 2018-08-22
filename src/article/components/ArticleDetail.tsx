@@ -1,31 +1,18 @@
 import * as React from 'react';
 import Header from "./Header";
-import {match} from "react-router";
+import { match } from "react-router";
 import * as ReactMarkdown from "react-markdown";
 import "github-markdown-css/github-markdown.css";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import {atelierSulphurpoolLight} from "react-syntax-highlighter/styles/hljs";
-import {autobind} from "core-decorators";
-import {Article, Articles} from "../@types";
+import { autobind } from "core-decorators";
+import { Article, Articles } from "../@types";
 import Axios from "axios";
-import {COSAPIURL} from "../../lib/data/baseApiUrl";
-import {History} from 'history';
+import { COSAPIURL } from "../../lib/data/baseApiUrl";
+import { History } from 'history';
 import { WiredButton } from 'react-wired-element';
 import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
 import Zmage from 'react-zmage';
 import ArticleComment from './ArticleComment';
-
-class CodeBlock extends React.Component<{language: string, value: string}, any> {
-    public render() {
-        const { language, value } = this.props;
-
-        return (
-            <SyntaxHighlighter language={language} style={atelierSulphurpoolLight}>
-                {value}
-            </SyntaxHighlighter>
-        );
-    }
-}
+import CodeBlock from './md_block/CodeBlock';
 
 class ImageBlock extends React.Component<{alt: string, src: string}, any> {
     public render() {
