@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Article, Comments, Comment } from '../@types';
+import { Article, Comments, Comment } from '../../@types';
 import Axios from 'axios';
-import { COSAPIURL_COMMENTS } from '../../lib/data/baseApiUrl';
+import { COSAPIURL_COMMENTS } from '../../../lib/data/baseApiUrl';
 import { fromJS } from 'immutable';
 import { FormattedMessage, FormattedDate, injectIntl, InjectedIntl } from 'react-intl';
 import { autobind } from "core-decorators";
