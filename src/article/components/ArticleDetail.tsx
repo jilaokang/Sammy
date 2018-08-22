@@ -1,17 +1,14 @@
 import * as React from 'react';
 import Header from "./Header";
 import { match } from "react-router";
-import * as ReactMarkdown from "react-markdown";
 import "github-markdown-css/github-markdown.css";
 import { autobind } from "core-decorators";
 import { Article, Articles } from "../@types";
 import Axios from "axios";
 import { COSAPIURL } from "../../lib/data/baseApiUrl";
 import { History } from 'history';
-import { WiredButton } from 'react-wired-element';
-import { FormattedMessage, injectIntl, InjectedIntl } from 'react-intl';
-import { ArticleComment, ArticleFooter } from './article';
-import { CodeBlock, ImageBlock } from './md_block';
+import { injectIntl, InjectedIntl } from 'react-intl';
+import { ArticleComment, ArticleFooter, ArticleContent } from './article';
 
 @autobind()
 class ArticleDetail extends React.Component<{ match: match<{name: string}>, articles: Articles, history: History, intl: InjectedIntl }, {articleContent: string, article: Article}> {
@@ -64,21 +61,16 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
 
     public render() {
         const { history } = this.props;
-        const { article } = this.state;
+        const { article, articleContent } = this.state;
         return (
             <section className="a-container animated fadeIn">
-                <Header title={this.state.article && this.state.article.get('title')} history={history}/>
-                <main>
-                    <ReactMarkdown
-                        source={this.state.articleContent}
-                        className="markdown-body"
-                        renderers={{code: CodeBlock, image: ImageBlock}}
-                    />
-                </main>
+                <Header title={article && article.get('title')} history={history}/>
+                
+                <ArticleContent content={articleContent} />
 
                 <ArticleComment article={article} />
 
-                <ArticleFooter onArticleJump={this.handleArticleJump} />
+                <ArticleFooter onArticleJump={v => this.handleArticleJump.bind(this, v)} />
             </section>
         );
     }
