@@ -1,8 +1,11 @@
-# On Dev
+# IN DEVELOPMENT
 
- ![demo1](https://raw.githubusercontent.com/Lurance/Sammy/master/demo/demo1.png)
- 
- ![demo2](https://raw.githubusercontent.com/Lurance/Sammy/master/demo/demo2.png)
- 
- 
- 
+Feature：
+
+> * Message Box
+> * Suppor Search: Search By Tags, Title and Content
+> * Resume
+
+## Have a Look
+
+[https://liangniang.xyz/](https://liangniang.xyz/)
