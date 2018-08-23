@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Header from "./Header";
+import { Header } from "../../common";
 import { match } from "react-router";
 import "github-markdown-css/github-markdown.css";
 import { autobind } from "core-decorators";

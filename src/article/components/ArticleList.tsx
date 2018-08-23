@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {connect} from "react-redux";
-import {Articles} from "../@types";
+import { connect } from "react-redux";
+import { Articles } from "../@types";
 import './index.css';
-import {WiredButton, WiredCard} from "react-wired-element";
-import {FormattedMessage, FormattedDate} from 'react-intl';
-import {PAGINATOR_STEP} from "../../lib/data/paginatorStep";
-import Header from "./Header";
-import {History} from 'history';
-import {autobind} from "core-decorators";
-import {nextPage, prePage} from "../actions";
+import { WiredButton, WiredCard } from "react-wired-element";
+import { FormattedMessage, FormattedDate } from 'react-intl';
+import { PAGINATOR_STEP } from "../../lib/data/paginatorStep";
+import { Header } from "../../common";
+import { History } from 'history';
+import { autobind } from "core-decorators";
+import { nextPage, prePage } from "../actions";
 
 @autobind()
 class ArticleListContainer extends React.Component<{ articles: Articles, toNextPage: any, page: number, toPrePage: any, history: History, remainArticleNum: number }, any> {
@@ -20,7 +20,7 @@ class ArticleListContainer extends React.Component<{ articles: Articles, toNextP
         const { articles, page, toNextPage, toPrePage, history, remainArticleNum } = this.props;
         return (
             <section className="a-container animated fadeIn">
-                <Header history={history}/>
+                <Header history={history} />
 
                 <main>
                     {
@@ -42,7 +42,7 @@ class ArticleListContainer extends React.Component<{ articles: Articles, toNextP
                                             />
                                         </p>
                                         <p>
-                                            <FormattedMessage id="Article.footer.tags"/>：
+                                            <FormattedMessage id="Article.footer.tags" />：
                                             {
                                                 article.get('tags').map((t, i) => (<span key={i}>{t}&nbsp;&nbsp;</span>))
                                             }
