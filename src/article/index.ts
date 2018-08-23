@@ -1,7 +1,7 @@
-import reducer from './reducer';
 import ArticleContainer from './components';
+import articleStore from './model';
 
 export {
-    reducer,
+    articleStore,
     ArticleContainer
 };

@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Article, Comments, Comment } from '../../@types';
+import { Comments, Comment, IArticle } from '../../@types';
 import Axios from 'axios';
 import { COSAPIURL_COMMENTS } from '../../../lib/data/baseApiUrl';
 import { fromJS } from 'immutable';
 import { FormattedMessage, FormattedDate, injectIntl, InjectedIntl } from 'react-intl';
 import { autobind } from "core-decorators";
 import { WiredTextarea, WiredInput, WiredButton } from 'react-wired-element';
+import * as _ from 'lodash';
 
 const getComment = async (filename: string) => {
     try {
@@ -38,7 +39,7 @@ const putComments = async (filename: string, rawData: any) => {
 };
 
 @autobind()
-class ArticleComment extends React.Component<{article: Article, intl: InjectedIntl}, {comments: Comments, reply: boolean, replyComment: Comment, nickname: string, rawData: any}> {
+class ArticleComment extends React.Component<{article: IArticle, intl: InjectedIntl}, {comments: Comments, reply: boolean, replyComment: Comment, nickname: string, rawData: any}> {
     public REPLAY: string = this.props.intl.formatMessage({ id: 'Article.comments.reply' });
     constructor(args) {
         super(args);
@@ -58,7 +59,7 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
     }
 
     public componentDidUpdate(preProps, preState) {
-        if (!this.props.article.equals(preProps.article)) {
+        if (!_.isEqual(this.props.article, preProps.article)) {
             this.getComments();
         }
     }
@@ -72,7 +73,7 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
     }
 
     public getComments() {
-        getComment(this.props.article.get('filename'))
+        getComment(this.props.article.filename)
             .then(data => data && this.setState({ ...data }));
     }
 
@@ -132,7 +133,7 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
             };
             rawData.push(needPushData);
         }
-        putComments(this.props.article.get('filename'), rawData);
+        putComments(this.props.article.filename, rawData);
         localStorage.setItem('nickname', nickname);
         (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value = '';
         this.setState({

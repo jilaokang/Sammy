@@ -1,5 +1,0 @@
-export const SET_ARTICLES = 'ARTICLE/SET_ARTICLES';
-
-export const NEXT_PAGE = 'ARTICLE/NEXT_PAGE';
-
-export const PRE_PAGE = 'ARTICLE/PRE_PAGE';

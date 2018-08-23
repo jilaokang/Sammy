@@ -18,13 +18,6 @@ export interface IComment {
     children?: Comments;
 }
 
-
 export type Comment = Map<keyof IComment, any>;
 
 export type Comments = List<Comment>;
-
-export type Article = Map<keyof IArticle, any>;
-
-export type Articles = List<Article>;
-
-export type ArticleState = Map<keyof {page: number, data: Articles}, any>;
