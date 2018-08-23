@@ -5,7 +5,7 @@ import Axios from 'axios';
 import { COSAPIURL } from "../lib/data/baseApiUrl";
 
 export class CommonStore {
-    @observable public showTabs = [];
+    @observable public showTabs: string[] = [];
 
     @action.bound
     public async fetchShowTabs() {

@@ -8,7 +8,7 @@ import './index.css';
 import lang from './lang';
 import registerServiceWorker from './registerServiceWorker';
 import store from "./store";
-import commonStore from './common/model';
+import { commonStore } from './common';
 import { Home } from "./home";
 import ContactComponentCreator from "./contact";
 import { ArticleContainer } from "./article";

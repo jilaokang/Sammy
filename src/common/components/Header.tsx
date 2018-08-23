@@ -3,13 +3,12 @@ import { FormattedMessage } from "react-intl";
 import * as React from "react";
 import * as _ from "lodash";
 import { History } from 'history';
-import { ShowTabs } from "../@types";
 import { observer, inject } from 'mobx-react';
 import { CommonStore } from '../model';
 
 @inject("commonStore")
 @observer
-class Header extends React.Component<{ history: History, title?: string, showTabs?: ShowTabs, commonStore?: CommonStore }, { expand: boolean }> {
+class Header extends React.Component<{ history: History, title?: string, commonStore?: CommonStore }, { expand: boolean }> {
     public headerTabsMap: { [key: string]: JSX.Element };
     public autoScroller: any;
 
