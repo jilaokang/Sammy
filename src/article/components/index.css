@@ -48,13 +48,27 @@
     display: flex;
     flex-direction: column;
     padding: 5vh 2vw;
-    justify-content: flex-start;
 }
 
-.a-container header .search .close {
-    margin: 0 auto;
+.a-container header .search .header {
+    height: 10vh;
+}
+
+.a-container header .search .header span {
+    float: left;
+    font-size: 30px;
+}
+
+.a-container header .search .header wired-icon-button {
     float: right;
-    align-self: flex-end;
+}
+
+.a-container header .search .input {
+    text-align: center;
+}
+
+.a-container header .search .input wired-input {
+    width: 80%;
 }
 
 .a-container header .button-list wired-button {
