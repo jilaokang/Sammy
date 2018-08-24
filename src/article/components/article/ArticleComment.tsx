@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { Article, Comments, Comment } from '../../@types';
+import { IArticle, IComment } from '../../../@types';
 import Axios from 'axios';
 import { COSAPIURL_COMMENTS } from '../../../lib/data/baseApiUrl';
 import { fromJS } from 'immutable';
 import { FormattedMessage, FormattedDate, injectIntl, InjectedIntl } from 'react-intl';
 import { autobind } from "core-decorators";
 import { WiredTextarea, WiredInput, WiredButton } from 'react-wired-element';
+import * as _ from 'lodash';
 
 const getComment = async (filename: string) => {
     try {
-        const res = await Axios.get<Comments>(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`);
+        const res = await Axios.get<IComment[]>(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`);
         const data = res.data;
         return {
-            comments: fromJS(res.data),
+            comments: data,
             rawData: data
         };
     } catch (err) {
@@ -30,7 +31,7 @@ const createCommentFile = async (filename: string) => {
 
 const putComments = async (filename: string, rawData: any) => {
     try {
-        const res = await Axios.put(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`, rawData);
+        Axios.put(`${COSAPIURL_COMMENTS}${filename.split('.')[0]}.json`, rawData);
         return true;
     } catch {
         return false;
@@ -38,7 +39,7 @@ const putComments = async (filename: string, rawData: any) => {
 };
 
 @autobind()
-class ArticleComment extends React.Component<{article: Article, intl: InjectedIntl}, {comments: Comments, reply: boolean, replyComment: Comment, nickname: string, rawData: any}> {
+class ArticleComment extends React.Component<{article: IArticle, intl: InjectedIntl}, {comments: IComment[], reply: boolean, replyComment: IComment, nickname: string, rawData: any}> {
     public REPLAY: string = this.props.intl.formatMessage({ id: 'Article.comments.reply' });
     constructor(args) {
         super(args);
@@ -58,7 +59,7 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
     }
 
     public componentDidUpdate(preProps, preState) {
-        if (!this.props.article.equals(preProps.article)) {
+        if (!_.isEqual(this.props.article, preProps.article)) {
             this.getComments();
         }
     }
@@ -72,11 +73,11 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
     }
 
     public getComments() {
-        getComment(this.props.article.get('filename'))
+        getComment(this.props.article.filename)
             .then(data => data && this.setState({ ...data }));
     }
 
-    public handleReply(comment: Comment) {
+    public handleReply(comment: IComment) {
         window.scrollTo(0, document.body.scrollHeight);
         this.setState({
             replyComment: comment,
@@ -96,8 +97,8 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
         const { nickname, replyComment, rawData } = this.state;
         const comment = (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value;
         if (replyComment) {
-            const replyId = replyComment.get('id');
-            const replyUsername = replyComment.get('username');
+            const replyId = replyComment.id;
+            const replyUsername = replyComment.username;
             const needPushData = {
                 id: Math.floor(Math.random() * 1000000),
                 father: {
@@ -132,7 +133,7 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
             };
             rawData.push(needPushData);
         }
-        putComments(this.props.article.get('filename'), rawData);
+        putComments(this.props.article.filename, rawData);
         localStorage.setItem('nickname', nickname);
         (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value = '';
         this.setState({
@@ -141,12 +142,12 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
         });
     }
 
-    public renderComments(comments: Comments) {
+    public renderComments(comments: IComment[]) {
         return comments.map(c => {
             let commentTitle;
-            const fromUsername = c.get('username');
-            if (c.get('father')) {
-                const toUsername = c.get('father').get('username');
+            const fromUsername = c.username;
+            if (c.father) {
+                const toUsername = c.father.username;
                 commentTitle = <span>
                     <span className={fromUsername === 'Sammy' ? 'deeppink' : 'deepskyblue'}>{fromUsername}</span>&nbsp;&nbsp;
                         {this.REPLAY}&nbsp;&nbsp;
@@ -156,11 +157,11 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
                 commentTitle = <span>{fromUsername}</span>;
             }
             return (
-                <section key={c.get('id')} className={c.get('father') ? "comment-list-child" : "comment-list"}>
+                <section key={c.id} className={c.father ? "comment-list-child" : "comment-list"}>
                     <span>{commentTitle}</span>
                     <span className="comment-date">
                         <FormattedDate
-                            value={c.get('date')}
+                            value={c.date}
                             month="long"
                             day="numeric"
                             year="numeric"
@@ -170,8 +171,8 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
                         />
                     </span>
                     <span className="comment-reply" onClick={this.handleReply.bind(this, c)}>{this.REPLAY}</span>
-                    <p>{c.get('comment')}</p>
-                    {c.get('children') && this.renderComments(c.get('children'))}
+                    <p>{c.comment}</p>
+                    {c.children && this.renderComments(c.children)}
                 </section>
             );
         });
@@ -187,7 +188,7 @@ class ArticleComment extends React.Component<{article: Article, intl: InjectedIn
                 </h2>
                 <hr />
                 {comments && this.renderComments(comments)}
-                {reply && <WiredTextarea rows={5} placeholder={`${nickname} ${this.REPLAY} ${replyComment ? replyComment.get('username') : 'Sammy'}`} />}
+                {reply && <WiredTextarea rows={5} placeholder={`${nickname} ${this.REPLAY} ${replyComment ? replyComment.username : 'Sammy'}`} />}
                 <br /><br />
                 {reply && (
                     <section>

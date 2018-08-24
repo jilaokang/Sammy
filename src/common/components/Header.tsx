@@ -3,12 +3,12 @@ import { FormattedMessage } from "react-intl";
 import * as React from "react";
 import * as _ from "lodash";
 import { History } from 'history';
-import { fetchShowTabs } from "../action";
-import { connect } from "react-redux";
-import { ShowTabs } from "../@types";
+import { observer, inject } from 'mobx-react';
+import { CommonStore } from '../model';
 
-
-class Header extends React.Component<{ history: History, title?: string, fetchShowTabs: any, showTabs: ShowTabs }, { expand: boolean }> {
+@inject("commonStore")
+@observer
+class Header extends React.Component<{ history: History, title?: string, commonStore?: CommonStore }, { expand: boolean }> {
     public headerTabsMap: { [key: string]: JSX.Element };
     public autoScroller: any;
 
@@ -32,7 +32,7 @@ class Header extends React.Component<{ history: History, title?: string, fetchSh
     }
 
     public componentDidMount() {
-        this.props.fetchShowTabs();
+        this.props.commonStore.fetchShowTabs();
 
         const o = document.getElementById("title");
 
@@ -67,20 +67,20 @@ class Header extends React.Component<{ history: History, title?: string, fetchSh
     }
 
     public render() {
-        const { title = 'Sammy', showTabs, history } = this.props;
-
+        const { title = 'Sammy', history } = this.props;
+        const { showTabs } = this.props.commonStore;
         const { expand } = this.state;
 
         return (
             <header>
                 <p className="title" onClick={() => history.goBack()} id="title">{title}</p>
                 <section className="button-list hidden-sm">
-                    {_.at(this.headerTabsMap, showTabs.toArray())}
+                    {_.at(this.headerTabsMap, showTabs)}
                 </section>
                 <section className="hidden-md">
                     <WiredButton onClick={() => this.setState((preState) => ({ expand: !preState.expand }))}><span><FormattedMessage id="Article.header.menu" />&nbsp;<span className="expand">&rsaquo;</span></span></WiredButton>
                     <section className="to-expand">
-                        {expand && _.at(this.headerTabsMap, showTabs.toArray())}
+                        {expand && _.at(this.headerTabsMap, showTabs)}
                     </section>
                 </section>
             </header>
@@ -88,12 +88,4 @@ class Header extends React.Component<{ history: History, title?: string, fetchSh
     }
 }
 
-const mapStateToProps = (state) => ({
-    showTabs: state.get('common').get('showTabs')
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    fetchShowTabs: () => dispatch(fetchShowTabs)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

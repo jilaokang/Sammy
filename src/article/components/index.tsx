@@ -2,15 +2,17 @@ import * as React from 'react';
 import { match, Route } from "react-router";
 import ArticleList from "./ArticleList";
 import ArticleDetail from "./ArticleDetail";
-import { fetchArticles } from "../actions";
-import {connect} from "react-redux";
-import { Articles, IArticle } from "../@types";
+import { IArticle } from "../../@types";
 import withWebPush from './pusher';
 import * as _ from 'lodash';
 import logo from "../../logo.png";
 import { injectIntl, InjectedIntl } from 'react-intl';
+import { observer, inject } from 'mobx-react';
+import { ArticleStore } from '../model';
 
-class ArticleContainer extends React.Component<{match: match<{name: string}>, fetchArticles: any, articles: Articles, webPush: any, intl: InjectedIntl}> {
+@inject("articleStore")
+@observer
+class ArticleContainer extends React.Component<{ match: match<{ name: string }>, webPush: any, intl: InjectedIntl, articleStore: ArticleStore }> {
     public oldArticles: IArticle[];
     constructor(args) {
         super(args);
@@ -18,20 +20,20 @@ class ArticleContainer extends React.Component<{match: match<{name: string}>, fe
     }
 
     public componentDidMount() {
-        this.props.fetchArticles();
+        this.props.articleStore.fetchArticles();
     }
 
     public componentDidUpdate(preProps, preState) {
         const { webPush, intl } = this.props;
-        const nowArticles = this.props.articles.toJS();
+        const nowArticles = this.props.articleStore.data;
         const diffArticles = _.differenceWith(nowArticles, this.oldArticles, _.isEqual);
         this.oldArticles = nowArticles;
         if (diffArticles.length > 0) {
-            let msg ='';
+            let msg = '';
             if (this.oldArticles.length === 0) {
-                msg = intl.formatMessage({ id: 'Push.articles.new'}, { number: nowArticles.length });
+                msg = intl.formatMessage({ id: 'Push.articles.new' }, { number: nowArticles.length });
             } else {
-                msg = intl.formatMessage({ id: 'Push.articles.diff'}, { number: diffArticles.length });
+                msg = intl.formatMessage({ id: 'Push.articles.diff' }, { number: diffArticles.length });
             }
             webPush.create(msg, {
                 icon: logo,
@@ -42,23 +44,14 @@ class ArticleContainer extends React.Component<{match: match<{name: string}>, fe
 
     public render() {
         const { match } = this.props;
+        const { data: articles } = this.props.articleStore;
         return (
             <section>
                 <Route path={`${match.url}`} exact={true} component={ArticleList} />
-                {this.props.articles.count() > 0 && <Route path={`${match.url}/:name`} render={(props) => <ArticleDetail {...props} articles={this.props.articles}/>} />}
+                {articles.length > 0 && <Route path={`${match.url}/:name`} render={(props) => <ArticleDetail {...props} articles={articles} />} />}
             </section>
         );
     }
 }
 
-const mapArticlesToProps = (state) => ({
-    articles: state.get('article').get('data')
-});
-
-
-const mapDispatchToProps = (dispatch) => ({
-    fetchArticles: () => dispatch(fetchArticles),
-});
-
-
-export default injectIntl(withWebPush(connect(mapArticlesToProps, mapDispatchToProps)(ArticleContainer)));
+export default injectIntl(withWebPush(ArticleContainer));

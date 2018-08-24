@@ -1,22 +1,22 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {IntlProvider} from 'react-intl';
-import {Provider} from "react-redux";
-import {HashRouter, Route, Switch} from "react-router-dom";
+import { IntlProvider } from 'react-intl';
+import { Provider } from 'mobx-react';
+import { HashRouter, Route, Switch } from "react-router-dom";
 import './index.css';
 import lang from './lang';
 import registerServiceWorker from './registerServiceWorker';
-import store from "./store";
-import {Home} from "./home";
+import { commonStore, articleStore } from './store';
+import { Home } from "./home";
 import ContactComponentCreator from "./contact";
-import {ArticleContainer} from "./article";
+import { ArticleContainer } from "./article";
 
 ReactDOM.render(
     <IntlProvider locale={lang.locale} messages={lang.message}>
-        <Provider store={store}>
+        <Provider commonStore={commonStore} articleStore={articleStore}>
             <HashRouter>
                 <Switch>
-                    <Route path="/" exact={true} component={Home}/>
+                    <Route path="/" exact={true} component={Home} />
                     <Route path="/contact">
                         <Switch>
                             <Route path="/contact/qq" component={ContactComponentCreator('qq')} />
