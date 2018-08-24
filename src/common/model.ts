@@ -12,8 +12,10 @@ export class CommonStore {
     @action
     public async fetchShowTabs() {
         if (this.showTabs.length === 0) {
-            const res = await Axios.get(`${COSAPIURL}header-config.json`);
-            this.showTabs = res.data;
+            const res = await Axios.get<ShowTabs>(`${COSAPIURL}header-config.json`);
+            const data = res.data;
+            data.push('search');
+            this.showTabs = data;
         }
     }
 }
