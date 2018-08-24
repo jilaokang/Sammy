@@ -26,7 +26,7 @@ class Header extends React.Component<{ history: History, title?: string, commonS
             articles: <WiredButton key={2} onClick={() => {history.push('/articles'); this.toggleExpand();}}><i className="iconfont icon-24" /><FormattedMessage id="Article.header.articles" /></WiredButton>,
             timeline: <WiredButton key={3} ><i className="iconfont icon-tubiaolunkuo-" /><FormattedMessage id="Article.header.date" /></WiredButton>,
             messageBox: <WiredButton key={4} ><i className="iconfont icon-liuyan" /><FormattedMessage id="Article.header.message" /></WiredButton>,
-            search: <WiredButton key={5} onClick={this.toggleSearchModal}><i className="iconfont icon-sousuo" /><FormattedMessage id="Article.header.search" /></WiredButton>,
+            search: <WiredButton key={5} onClick={() => {this.toggleSearchModal(); this.toggleExpand();}}><i className="iconfont icon-sousuo" /><FormattedMessage id="Article.header.search" /></WiredButton>,
             about: <WiredButton key={6} ><i className="iconfont icon-wo" /><FormattedMessage id="Article.header.me" /></WiredButton>
         };
 

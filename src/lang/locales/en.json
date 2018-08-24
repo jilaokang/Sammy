@@ -21,5 +21,6 @@
   "Push.articles.diff": "Sammy Liang added new {number} articles",
   "Push.articles.new": "Sammy Liang wrote {number} articles in all",
   "Search.header.title": "Article search",
-  "Search.input.plhd": "Search by title, tag or date of the article"
+  "Search.input.plhd": "Search by title, tag or date of the article",
+  "Search.base.none": "No search results. Input some text and press the enter button  "
 }

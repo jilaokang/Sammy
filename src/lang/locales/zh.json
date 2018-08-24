@@ -21,5 +21,6 @@
   "Push.articles.diff": "诗亮新增了{number}篇文章",
   "Push.articles.new": "诗亮总共写了{number}篇文章",
   "Search.header.title": "文章搜索",
-  "Search.input.plhd": "通过文章的标题标签或者日期来搜索"
+  "Search.input.plhd": "通过文章的标题标签或者日期来搜索",
+  "Search.base.none": "没有任何搜索结果，输入一些文字然后按下Enter键"
 }

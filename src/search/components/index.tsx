@@ -2,17 +2,15 @@ import * as React from 'react';
 
 import { WiredCard, WiredIconButton, WiredInput } from 'react-wired-element';
 
-import { FormattedHTMLMessage, injectIntl, InjectedIntl } from 'react-intl';
+import { FormattedHTMLMessage, injectIntl, InjectedIntl, FormattedMessage } from 'react-intl';
 
 import { autobind } from 'core-decorators';
 
-import { observer, inject } from 'mobx-react';
+import { inject } from 'mobx-react';
 
 import { ArticleStore } from '../../article/model';
 
 import { IArticle } from '../../@types';
-
-import { History } from 'history';
 
 @inject("articleStore")
 @autobind
@@ -57,12 +55,12 @@ class Search extends React.Component<{ onClose: any, intl: InjectedIntl, article
                         <WiredInput placeholder={PLHD} name="search" value={search} />
                     </section>
                     <section className="result-list">
-                        {searchResult.map(a => (
+                        {searchResult.length !== 0 ? searchResult.map(a => (
                             <section key={a.id} onClick={onClickSearchArticle(a)}>
                                 <WiredIconButton>radio_button_unchecked</WiredIconButton>
                                 <span>{a.title}</span>
                             </section>
-                        ))}
+                        )) : <span className="none"><FormattedMessage id="Search.base.none" /></span>}
                     </section>
                 </WiredCard>
             </section>

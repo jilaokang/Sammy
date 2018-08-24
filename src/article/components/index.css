@@ -78,8 +78,11 @@
 }
 
 .a-container header .search .result-list section {
-    margin: 2vh 0;
-    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    height: 10vh;
+    align-items: center;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
 }
 
 .a-container header .search .result-list section:hover {
@@ -88,7 +91,13 @@
 
 .a-container header .search .result-list section span {
     margin-left: 2vw;
-    word-wrap: break-word;
+}
+
+.a-container header .search .result-list span.none {
+    margin-top: 5vh;
+    width: 100%;
+    text-align: center;
+    display: block;
 }
 
 .a-container header .button-list wired-button {
@@ -250,5 +259,15 @@
     .a-container header .hidden-md wired-button:first-child{
         width: 65px;
         height: 29px;
+    }
+
+    .a-container header .search {
+        width: 85vw;
+        height: 60vh;
+        padding: 5vh 4vw;
+    }
+
+    .a-container header .search .result-list {
+        height: 40vh;
     }
 }
