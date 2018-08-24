@@ -38,9 +38,9 @@
     position: fixed;
     z-index: 999;
     background: #ffffff;
-    width: 40vw;
-    height: 40vh;
-    top: 20%;
+    width: 45vw;
+    height: 50vh;
+    top: 10%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -69,6 +69,26 @@
 
 .a-container header .search .input wired-input {
     width: 80%;
+}
+
+.a-container header .search .result-list {
+    height: 30vh;
+    width: 100%;
+    overflow: auto;
+}
+
+.a-container header .search .result-list section {
+    margin: 2vh 0;
+    cursor: pointer;
+}
+
+.a-container header .search .result-list section:hover {
+    background: rgb(0, 0, 0, 0.1);
+}
+
+.a-container header .search .result-list section span {
+    margin-left: 2vw;
+    word-wrap: break-word;
 }
 
 .a-container header .button-list wired-button {

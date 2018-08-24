@@ -7,6 +7,7 @@ import { observer, inject } from 'mobx-react';
 import { CommonStore } from '../model';
 import { Search } from '../../search';
 import { autobind } from 'core-decorators';
+import { IArticle } from "../../@types";
 
 @inject("commonStore")
 @observer
@@ -74,6 +75,11 @@ class Header extends React.Component<{ history: History, title?: string, commonS
         }
     }
 
+    public handleClickSearchArticle(article: IArticle) {
+        this.toggleSearchModal();
+        this.props.history.push(`/articles/${article.title}`);
+    }
+
     public render() {
         const { title = 'Sammy', history } = this.props;
         const { showTabs } = this.props.commonStore;
@@ -85,7 +91,7 @@ class Header extends React.Component<{ history: History, title?: string, commonS
                 <section className="button-list hidden-sm">
                     {_.at(this.headerTabsMap, showTabs)}
                 </section>
-                {searchExpand && <Search onClose={this.toggleSearchModal} />}
+                {searchExpand && <Search onClose={this.toggleSearchModal} history={history} onClickSearchArticle={(v) => this.handleClickSearchArticle.bind(this, v)}/>}
                 <section className="hidden-md">
                     <WiredButton onClick={() => this.setState((preState) => ({ expand: !preState.expand }))}><span><FormattedMessage id="Article.header.menu" />&nbsp;<span className="expand">&rsaquo;</span></span></WiredButton>
                     <section className="to-expand">

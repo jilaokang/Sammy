@@ -12,10 +12,11 @@ import { ArticleStore } from '../../article/model';
 
 import { IArticle } from '../../@types';
 
+import { History } from 'history';
+
 @inject("articleStore")
-@observer
 @autobind
-class Search extends React.Component<{ onClose: any, intl: InjectedIntl, articleStore: ArticleStore }, { search: string, searchResult: IArticle[] }> {
+class Search extends React.Component<{ onClose: any, intl: InjectedIntl, articleStore: ArticleStore, onClickSearchArticle: any }, { search: string, searchResult: IArticle[] }> {
     constructor(args) {
         super(args);
         this.state = {
@@ -39,21 +40,29 @@ class Search extends React.Component<{ onClose: any, intl: InjectedIntl, article
     }
 
     public render() {
-        const { onClose, intl } = this.props;
+        const { onClose, intl, onClickSearchArticle } = this.props;
         const { search, searchResult } = this.state;
         const PLHD = intl.formatMessage({
             id: 'Search.input.plhd'
         });
         console.log(searchResult);
         return (
-            <section className="search-container animated slideInDown">
-                <WiredCard class="search">
-                    <section className="header" onClick={onClose}>
+            <section className="search-container">
+                <WiredCard class="search animated slideInDown">
+                    <section className="header">
                         <FormattedHTMLMessage id="Search.header.title"/>
-                        <WiredIconButton>clear</WiredIconButton>
+                        <WiredIconButton onClick={onClose}>clear</WiredIconButton>
                     </section>
                     <section className="input">
                         <WiredInput placeholder={PLHD} name="search" value={search} />
+                    </section>
+                    <section className="result-list">
+                        {searchResult.map(a => (
+                            <section key={a.id} onClick={onClickSearchArticle(a)}>
+                                <WiredIconButton>radio_button_unchecked</WiredIconButton>
+                                <span>{a.title}</span>
+                            </section>
+                        ))}
                     </section>
                 </WiredCard>
             </section>
