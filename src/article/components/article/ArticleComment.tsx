@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IArticle, IComment } from '../../@types';
+import { IArticle, IComment } from '../../../@types';
 import Axios from 'axios';
 import { COSAPIURL_COMMENTS } from '../../../lib/data/baseApiUrl';
 import { fromJS } from 'immutable';

@@ -1,5 +1,5 @@
 import { observable, action, computed } from "mobx";
-import { IArticle } from './@types';
+import { IArticle } from '../@types';
 import Axios from 'axios';
 import { COSAPIURL } from '../lib/data/baseApiUrl';
 import { PAGINATOR_STEP } from '../lib/data/paginatorStep';

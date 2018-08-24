@@ -3,7 +3,7 @@ import { Header } from "../../common";
 import { match } from "react-router";
 import "github-markdown-css/github-markdown.css";
 import { autobind } from "core-decorators";
-import { IArticle } from "../@types";
+import { IArticle } from "../../@types";
 import Axios from "axios";
 import { COSAPIURL } from "../../lib/data/baseApiUrl";
 import { History } from 'history';

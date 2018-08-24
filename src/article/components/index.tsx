@@ -2,7 +2,7 @@ import * as React from 'react';
 import { match, Route } from "react-router";
 import ArticleList from "./ArticleList";
 import ArticleDetail from "./ArticleDetail";
-import { IArticle } from "../@types";
+import { IArticle } from "../../@types";
 import withWebPush from './pusher';
 import * as _ from 'lodash';
 import logo from "../../logo.png";
