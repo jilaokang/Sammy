@@ -4,8 +4,10 @@ import Axios from 'axios';
 
 import { COSAPIURL } from "../lib/data/baseApiUrl";
 
+import { ShowTabs } from '../@types';
+
 export class CommonStore {
-    @observable public showTabs: string[] = [];
+    @observable public showTabs: ShowTabs = [];
 
     @action
     public async fetchShowTabs() {
