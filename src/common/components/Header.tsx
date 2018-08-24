@@ -22,8 +22,8 @@ class Header extends React.Component<{ history: History, title?: string, commonS
         const { history } = this.props;
 
         this.headerTabsMap = {
-            home: <WiredButton key={1} onClick={() => history.push('/')}><i className="iconfont icon-home" /><FormattedMessage id="Article.header.home" /></WiredButton>,
-            articles: <WiredButton key={2} onClick={() => history.push('/articles')}><i className="iconfont icon-24" /><FormattedMessage id="Article.header.articles" /></WiredButton>,
+            home: <WiredButton key={1} onClick={() => {history.push('/'); this.toggleExpand();}}><i className="iconfont icon-home" /><FormattedMessage id="Article.header.home" /></WiredButton>,
+            articles: <WiredButton key={2} onClick={() => {history.push('/articles'); this.toggleExpand();}}><i className="iconfont icon-24" /><FormattedMessage id="Article.header.articles" /></WiredButton>,
             timeline: <WiredButton key={3} ><i className="iconfont icon-tubiaolunkuo-" /><FormattedMessage id="Article.header.date" /></WiredButton>,
             messageBox: <WiredButton key={4} ><i className="iconfont icon-liuyan" /><FormattedMessage id="Article.header.message" /></WiredButton>,
             search: <WiredButton key={5} onClick={this.toggleSearchModal}><i className="iconfont icon-sousuo" /><FormattedMessage id="Article.header.search" /></WiredButton>,
@@ -79,6 +79,10 @@ class Header extends React.Component<{ history: History, title?: string, commonS
         this.toggleSearchModal();
         this.props.history.push(`/articles/${article.title}`);
     }
+    
+    public toggleExpand() {
+        this.setState((preState) => ({ expand: !preState.expand }));
+    }
 
     public render() {
         const { title = 'Sammy', history } = this.props;
@@ -93,7 +97,7 @@ class Header extends React.Component<{ history: History, title?: string, commonS
                 </section>
                 {searchExpand && <Search onClose={this.toggleSearchModal} history={history} onClickSearchArticle={(v) => this.handleClickSearchArticle.bind(this, v)}/>}
                 <section className="hidden-md">
-                    <WiredButton onClick={() => this.setState((preState) => ({ expand: !preState.expand }))}><span><FormattedMessage id="Article.header.menu" />&nbsp;<span className="expand">&rsaquo;</span></span></WiredButton>
+                    <WiredButton onClick={this.toggleExpand}><span><FormattedMessage id="Article.header.menu" />&nbsp;<span className="expand">&rsaquo;</span></span></WiredButton>
                     <section className="to-expand">
                         {expand && _.at(this.headerTabsMap, showTabs)}
                     </section>
