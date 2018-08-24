@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { match, Route } from "react-router";
-import ArticleList from "./ArticleList";
-import ArticleDetail from "./ArticleDetail";
+import { match, Route, RouteProps } from "react-router";
 import { IArticle } from "../../@types";
 import withWebPush from './pusher';
 import * as _ from 'lodash';
@@ -9,6 +7,12 @@ import logo from "../../logo.png";
 import { injectIntl, InjectedIntl } from 'react-intl';
 import { observer, inject } from 'mobx-react';
 import { ArticleStore } from '../model';
+import { withLoadable } from '../../common';
+import './index.css';
+
+const ArticleList = withLoadable(() => import('./ArticleList'));
+
+const ArticleDetail = withLoadable(() => import('./ArticleDetail'));
 
 @inject("articleStore")
 @observer
@@ -48,7 +52,7 @@ class ArticleContainer extends React.Component<{ match: match<{ name: string }>,
         return (
             <section>
                 <Route path={`${match.url}`} exact={true} component={ArticleList} />
-                {articles.length > 0 && <Route path={`${match.url}/:name`} render={(props) => <ArticleDetail {...props} articles={articles} />} />}
+                {articles.length > 0 && <Route path={`${match.url}/:name`} render={(props: RouteProps & any) => <ArticleDetail {...props} articles={articles} />} />}
             </section>
         );
     }

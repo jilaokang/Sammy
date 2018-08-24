@@ -37,3 +37,12 @@ body {
 .deeppink {
     color: deeppink;
 }
+
+.loading-center {
+    width: 100vw !important;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
