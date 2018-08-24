@@ -24,6 +24,39 @@
     margin-left:auto;
 }
 
+.a-container .search-container {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 9, 9, 0.1);
+}
+
+.a-container header .search {
+    position: fixed;
+    z-index: 999;
+    background: #ffffff;
+    width: 40vw;
+    height: 40vh;
+    top: 20%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 5vh 2vw;
+    justify-content: flex-start;
+}
+
+.a-container header .search .close {
+    margin: 0 auto;
+    float: right;
+    align-self: flex-end;
+}
+
 .a-container header .button-list wired-button {
     margin: 0 5px;
     font-size: 15px;

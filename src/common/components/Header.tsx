@@ -5,10 +5,13 @@ import * as _ from "lodash";
 import { History } from 'history';
 import { observer, inject } from 'mobx-react';
 import { CommonStore } from '../model';
+import { Search } from '../../search';
+import { autobind } from 'core-decorators';
 
 @inject("commonStore")
 @observer
-class Header extends React.Component<{ history: History, title?: string, commonStore?: CommonStore }, { expand: boolean }> {
+@autobind
+class Header extends React.Component<{ history: History, title?: string, commonStore?: CommonStore }, { expand: boolean, searchExpand: boolean }> {
     public headerTabsMap: { [key: string]: JSX.Element };
     public autoScroller: any;
 
@@ -22,13 +25,18 @@ class Header extends React.Component<{ history: History, title?: string, commonS
             articles: <WiredButton key={2} onClick={() => history.push('/articles')}><i className="iconfont icon-24" /><FormattedMessage id="Article.header.articles" /></WiredButton>,
             timeline: <WiredButton key={3} ><i className="iconfont icon-tubiaolunkuo-" /><FormattedMessage id="Article.header.date" /></WiredButton>,
             messageBox: <WiredButton key={4} ><i className="iconfont icon-liuyan" /><FormattedMessage id="Article.header.message" /></WiredButton>,
-            search: <WiredButton key={5} ><i className="iconfont icon-sousuo" /><FormattedMessage id="Article.header.search" /></WiredButton>,
+            search: <WiredButton key={5} onClick={this.toggleSearchModal}><i className="iconfont icon-sousuo" /><FormattedMessage id="Article.header.search" /></WiredButton>,
             about: <WiredButton key={6} ><i className="iconfont icon-wo" /><FormattedMessage id="Article.header.me" /></WiredButton>
         };
 
         this.state = {
-            expand: false
+            expand: false,
+            searchExpand: false
         };
+    }
+
+    public toggleSearchModal() {
+        this.setState((prevState => ({ searchExpand: !prevState.searchExpand })));
     }
 
     public componentDidMount() {
@@ -69,7 +77,7 @@ class Header extends React.Component<{ history: History, title?: string, commonS
     public render() {
         const { title = 'Sammy', history } = this.props;
         const { showTabs } = this.props.commonStore;
-        const { expand } = this.state;
+        const { expand, searchExpand } = this.state;
 
         return (
             <header>
@@ -77,12 +85,14 @@ class Header extends React.Component<{ history: History, title?: string, commonS
                 <section className="button-list hidden-sm">
                     {_.at(this.headerTabsMap, showTabs)}
                 </section>
+                {searchExpand && <Search onClose={this.toggleSearchModal} />}
                 <section className="hidden-md">
                     <WiredButton onClick={() => this.setState((preState) => ({ expand: !preState.expand }))}><span><FormattedMessage id="Article.header.menu" />&nbsp;<span className="expand">&rsaquo;</span></span></WiredButton>
                     <section className="to-expand">
                         {expand && _.at(this.headerTabsMap, showTabs)}
                     </section>
                 </section>
+            
             </header>
         );
     }
