@@ -43,7 +43,6 @@ class Search extends React.Component<{ onClose: any, intl: InjectedIntl, article
         const PLHD = intl.formatMessage({
             id: 'Search.input.plhd'
         });
-        console.log(searchResult);
         return (
             <section className="search-container">
                 <WiredCard class="search animated slideInDown">
