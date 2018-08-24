@@ -1,8 +1,17 @@
 import { observable, action, computed } from "mobx";
+
 import { IArticle } from '../@types';
+
 import Axios from 'axios';
+
 import { COSAPIURL } from '../lib/data/baseApiUrl';
+
 import { PAGINATOR_STEP } from '../lib/data/paginatorStep';
+
+import * as _ from 'lodash';
+
+import * as moment from "moment";
+
 
 export class ArticleStore {
     @observable public page: number = 1;
@@ -40,6 +49,13 @@ export class ArticleStore {
             localStorage.setItem('articlesData', JSON.stringify(articlesData));
             this.data = articlesData;
         }
+    }
+
+    public getArticlesBySearch(v) {
+        v = v.toLowerCase();
+        return _.filter(this.data, (a) => a.title.toLowerCase().includes(v) 
+        || a.tags.some(t => t.toLowerCase().includes(v))
+        || moment(a.createdAt).format("YYYY-MM-DD").includes(v));
     }
 }
 

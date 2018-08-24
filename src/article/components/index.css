@@ -24,6 +24,82 @@
     margin-left:auto;
 }
 
+.a-container .search-container {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 9, 9, 0.1);
+}
+
+.a-container header .search {
+    position: fixed;
+    z-index: 999;
+    background: #ffffff;
+    width: 45vw;
+    height: 50vh;
+    top: 10%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 5vh 2vw;
+}
+
+.a-container header .search .header {
+    height: 10vh;
+}
+
+.a-container header .search .header span {
+    float: left;
+    font-size: 30px;
+}
+
+.a-container header .search .header wired-icon-button {
+    float: right;
+}
+
+.a-container header .search .input {
+    text-align: center;
+}
+
+.a-container header .search .input wired-input {
+    width: 80%;
+}
+
+.a-container header .search .result-list {
+    height: 30vh;
+    width: 100%;
+    overflow: auto;
+}
+
+.a-container header .search .result-list section {
+    display: flex;
+    flex-direction: row;
+    height: 10vh;
+    align-items: center;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+}
+
+.a-container header .search .result-list section:hover {
+    background: rgb(0, 0, 0, 0.1);
+}
+
+.a-container header .search .result-list section span {
+    margin-left: 2vw;
+}
+
+.a-container header .search .result-list span.none {
+    margin-top: 5vh;
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
 .a-container header .button-list wired-button {
     margin: 0 5px;
     font-size: 15px;
@@ -183,5 +259,15 @@
     .a-container header .hidden-md wired-button:first-child{
         width: 65px;
         height: 29px;
+    }
+
+    .a-container header .search {
+        width: 85vw;
+        height: 60vh;
+        padding: 5vh 4vw;
+    }
+
+    .a-container header .search .result-list {
+        height: 40vh;
     }
 }

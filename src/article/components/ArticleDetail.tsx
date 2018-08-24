@@ -68,7 +68,7 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
                 
                 <ArticleContent content={articleContent} />
 
-                <ArticleComment article={article} />
+                <ArticleComment article={article}  />
 
                 <ArticleFooter onArticleJump={v => this.handleArticleJump.bind(this, v)} />
             </section>
