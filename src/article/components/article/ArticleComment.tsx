@@ -2,7 +2,6 @@ import * as React from 'react';
 import { IArticle, IComment } from '../../../@types';
 import Axios from 'axios';
 import { COSAPIURL_COMMENTS } from '../../../lib/data/baseApiUrl';
-import { fromJS } from 'immutable';
 import { FormattedMessage, FormattedDate, injectIntl, InjectedIntl } from 'react-intl';
 import { autobind } from "core-decorators";
 import { WiredTextarea, WiredInput, WiredButton } from 'react-wired-element';
@@ -19,7 +18,7 @@ const getComment = async (filename: string) => {
     } catch (err) {
         createCommentFile(filename);
         return {
-            comments: fromJS([]),
+            comments: [],
             rawData: []
         };
     }
@@ -137,7 +136,7 @@ class ArticleComment extends React.Component<{article: IArticle, intl: InjectedI
         localStorage.setItem('nickname', nickname);
         (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value = '';
         this.setState({
-            comments: fromJS(rawData),
+            comments: rawData,
             rawData
         });
     }

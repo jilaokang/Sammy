@@ -1,5 +1,8 @@
-import CodeBlock from './CodeBlock';
-import ImageBlock from './ImageBlock';
+import { withLoadable } from '../../../common';
+
+const CodeBlock = withLoadable(() => import('./CodeBlock'));
+
+const ImageBlock = withLoadable(() => import('./ImageBlock'));
 
 export {
     CodeBlock,

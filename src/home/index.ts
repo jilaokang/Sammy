@@ -1,4 +1,6 @@
-import Home from './components';
+import { withLoadable } from '../common';
+
+const Home = withLoadable(() => import('./components'));
 
 export {
     Home

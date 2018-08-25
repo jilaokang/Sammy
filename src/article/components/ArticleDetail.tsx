@@ -8,7 +8,7 @@ import Axios from "axios";
 import { COSAPIURL } from "../../lib/data/baseApiUrl";
 import { History } from 'history';
 import { injectIntl, InjectedIntl } from 'react-intl';
-import { ArticleComment, ArticleFooter, ArticleContent } from './article';
+import { ArticleComment, ArticleContent, ArticleFooter } from './article';
 
 @autobind()
 class ArticleDetail extends React.Component<{ match: match<{name: string}>, articles: IArticle[], history: History, intl: InjectedIntl }, {articleContent: string, article: IArticle}> {
