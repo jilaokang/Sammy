@@ -14,12 +14,13 @@ import { IArticle } from '../../@types';
 
 @inject("articleStore")
 @autobind
-class Search extends React.Component<{ onClose: any, intl: InjectedIntl, articleStore: ArticleStore, onClickSearchArticle: any }, { search: string, searchResult: IArticle[] }> {
+class Search extends React.Component<{ onClose: any, intl: InjectedIntl, articleStore: ArticleStore, onClickSearchArticle: any }, { search: string, searchResult: IArticle[], close: boolean }> {
     constructor(args) {
         super(args);
         this.state = {
             search: '',
-            searchResult: []
+            searchResult: [],
+            close: false
         };
     }
 
@@ -39,16 +40,18 @@ class Search extends React.Component<{ onClose: any, intl: InjectedIntl, article
 
     public render() {
         const { onClose, intl, onClickSearchArticle } = this.props;
-        const { search, searchResult } = this.state;
+        const { search, searchResult, close } = this.state;
         const PLHD = intl.formatMessage({
             id: 'Search.input.plhd'
         });
         return (
             <section className="search-container">
-                <WiredCard class="search animated slideInDown">
+                <WiredCard class={close ? 'search animated slideOutUp' : 'search animated slideInDown'}>
                     <section className="header">
                         <FormattedHTMLMessage id="Search.header.title"/>
-                        <WiredIconButton onClick={onClose}>clear</WiredIconButton>
+                        <WiredIconButton onClick={() => {this.setState({ close: true }); setTimeout(() => {
+                            onClose();
+                        }, 700);}}>clear</WiredIconButton>
                     </section>
                     <section className="input">
                         <WiredInput placeholder={PLHD} name="search" value={search} />

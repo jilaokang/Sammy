@@ -1,6 +1,7 @@
-import Header from './components/Header';
 import commonStore from './model';
 import withLoadable from './helper/withLoadable';
+
+const Header = withLoadable(() => import('./components/Header'));
 
 export {
     Header,
