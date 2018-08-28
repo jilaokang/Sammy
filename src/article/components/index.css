@@ -100,7 +100,7 @@
 }
 
 
-.a-container main wired-card {
+.a-container main .article-container {
     margin: 40px 0;
     padding: 0 5vw 0 5vw;
     width: 70vw;
@@ -108,7 +108,7 @@
     height: auto;
 }
 
-.a-container main wired-card:hover {
+.a-container main .article-container:hover {
     transform: rotate(1deg);
 }
 

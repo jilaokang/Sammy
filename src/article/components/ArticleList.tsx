@@ -1,12 +1,13 @@
 import * as React from 'react';
 import './index.css';
-import { WiredButton, WiredCard } from "react-wired-element";
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import { Header } from "../../common";
 import { History } from 'history';
 import { autobind } from "core-decorators";
 import { observer, inject } from 'mobx-react';
 import { ArticleStore } from '../model';
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 
 @inject('articleStore')
 @observer
@@ -26,7 +27,7 @@ class ArticleListContainer extends React.Component<{ history: History, articleSt
                 <main>
                     {
                         articles.map(article => (
-                            <WiredCard key={article.id} elevation={2}>
+                            <Card key={article.id} elevation={2} className="article-container">
                                 <article onClick={this.handleArticleClick.bind(this, article)}>
                                     <h2>{article.title}</h2>
                                     <p className="excerpt">
@@ -50,14 +51,14 @@ class ArticleListContainer extends React.Component<{ history: History, articleSt
                                         </p>
                                     </section>
                                 </article>
-                            </WiredCard>
+                            </Card>
                         ))
                     }
                 </main>
 
                 <section className="footer-pagination">
-                    {page !== 1 && <WiredButton onClick={() => articleStore.prePage()} class="pre">上一页</WiredButton>}
-                    {remainArticleNum > 0 && <WiredButton onClick={() => articleStore.nextPage()} class="next">下一页</WiredButton>}
+                    {page !== 1 && <Button variant="outlined" onClick={() => articleStore.prePage()} className="pre">上一页</Button>}
+                    {remainArticleNum > 0 && <Button variant="outlined" onClick={() => articleStore.nextPage()} className="next">下一页</Button>}
                 </section>
             </section>
         );
