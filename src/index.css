@@ -4,6 +4,8 @@
 
 @import "lib/css/iconfont.css";
 
+@import "lib/css/additional_iconfont/iconfont.css";
+
 * {
     font-family: Hannotate SC, Hanzipen SC, FangSong, PingFang SC, 华文细黑, 楷体，serif !important;
 }

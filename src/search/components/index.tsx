@@ -1,16 +1,13 @@
 import * as React from 'react';
-
-import { WiredCard, WiredIconButton, WiredInput } from 'react-wired-element';
-
 import { FormattedHTMLMessage, injectIntl, InjectedIntl, FormattedMessage } from 'react-intl';
-
 import { autobind } from 'core-decorators';
-
 import { inject } from 'mobx-react';
-
 import { ArticleStore } from '../../article/model';
-
 import { IArticle } from '../../@types';
+import Card from '@material-ui/core/Card';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+import * as _ from 'lodash';
 
 @inject("articleStore")
 @autobind
@@ -24,18 +21,10 @@ class Search extends React.Component<{ onClose: any, intl: InjectedIntl, article
         };
     }
 
-    public componentDidMount() {
-        document.addEventListener('change', this.changeListener);
-    }
-
-    public changeListener(ev) {
+    public handleInputChange(ev) {
         const value = ev.target.value;
         const { articleStore } = this.props;
         this.setState({ search: value, searchResult: articleStore.getArticlesBySearch(value) });
-    }
-
-    public componentWillUnmount() {
-        document.removeEventListener('change', this.changeListener);
     }
 
     public render() {
@@ -46,25 +35,27 @@ class Search extends React.Component<{ onClose: any, intl: InjectedIntl, article
         });
         return (
             <section className="search-container">
-                <WiredCard class={close ? 'search animated slideOutUp' : 'search animated slideInDown'}>
+                <Card className={close ? 'search animated slideOutUp' : 'search animated slideInDown'}>
                     <section className="header">
-                        <FormattedHTMLMessage id="Search.header.title"/>
-                        <WiredIconButton onClick={() => {this.setState({ close: true }); setTimeout(() => {
-                            onClose();
-                        }, 700);}}>clear</WiredIconButton>
+                        <FormattedHTMLMessage id="Search.header.title" />
+                        <IconButton onClick={() => {
+                            this.setState({ close: true }); setTimeout(() => {
+                                onClose();
+                            }, 700);
+                        }}><i className="iconfont icon-guanbi" /></IconButton>
                     </section>
                     <section className="input">
-                        <WiredInput placeholder={PLHD} name="search" value={search} />
+                        <TextField label={PLHD} name="search" fullWidth={true} onChange={this.handleInputChange} />
                     </section>
                     <section className="result-list">
                         {searchResult.length !== 0 ? searchResult.map(a => (
                             <section key={a.id} onClick={onClickSearchArticle(a)}>
-                                <WiredIconButton>radio_button_unchecked</WiredIconButton>
+                                <IconButton><i className="iconfont icon-24" /></IconButton>&nbsp;
                                 <span>{a.title}</span>
                             </section>
                         )) : <span className="none"><FormattedMessage id="Search.base.none" /></span>}
                     </section>
-                </WiredCard>
+                </Card>
             </section>
         );
     }

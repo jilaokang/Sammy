@@ -52,10 +52,14 @@ export class ArticleStore {
     }
 
     public getArticlesBySearch(v) {
-        v = v.toLowerCase();
-        return _.filter(this.data, (a) => a.title.toLowerCase().includes(v) 
-        || a.tags.some(t => t.toLowerCase().includes(v))
-        || moment(a.createdAt).format("YYYY-MM-DD").includes(v));
+        if (v !== '') {
+            v = v.toLowerCase();
+            return _.filter(this.data, (a) => a.title.toLowerCase().includes(v) 
+                || a.tags.some(t => t.toLowerCase().includes(v))
+                || moment(a.createdAt).format("YYYY-MM-DD").includes(v));   
+        } else {
+            return [];
+        }
     }
 }
 
