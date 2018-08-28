@@ -1,4 +1,3 @@
-import { WiredButton } from "react-wired-element";
 import { FormattedMessage } from "react-intl";
 import * as React from "react";
 import * as _ from "lodash";
@@ -8,12 +7,19 @@ import { CommonStore } from '../model';
 import { Search } from '../../search';
 import { autobind } from 'core-decorators';
 import { IArticle } from "../../@types";
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 @inject("commonStore")
 @observer
 @autobind
-class Header extends React.Component<{ history: History, title?: string, commonStore?: CommonStore }, { expand: boolean, searchExpand: boolean }> {
+class Header extends React.Component<{ history: History, title?: string, commonStore?: CommonStore }, { expand: boolean, searchExpand: boolean, anchorEl: any }> {
     public headerTabsMap: { [key: string]: JSX.Element };
+    public expandHeaderTabsMap: { [key: string]: JSX.Element };
     public autoScroller: any;
 
     constructor(args) {
@@ -22,17 +28,45 @@ class Header extends React.Component<{ history: History, title?: string, commonS
         const { history } = this.props;
 
         this.headerTabsMap = {
-            home: <WiredButton key={1} onClick={() => {history.push('/'); this.toggleExpand();}}><i className="iconfont icon-home" /><FormattedMessage id="Article.header.home" /></WiredButton>,
-            articles: <WiredButton key={2} onClick={() => {history.push('/articles'); this.toggleExpand();}}><i className="iconfont icon-24" /><FormattedMessage id="Article.header.articles" /></WiredButton>,
-            timeline: <WiredButton key={3} ><i className="iconfont icon-tubiaolunkuo-" /><FormattedMessage id="Article.header.date" /></WiredButton>,
-            messageBox: <WiredButton key={4} ><i className="iconfont icon-liuyan" /><FormattedMessage id="Article.header.message" /></WiredButton>,
-            search: <WiredButton key={5} onClick={() => {this.toggleSearchModal(); this.toggleExpand();}}><i className="iconfont icon-sousuo" /><FormattedMessage id="Article.header.search" /></WiredButton>,
-            about: <WiredButton key={6} ><i className="iconfont icon-wo" /><FormattedMessage id="Article.header.me" /></WiredButton>
+            home: <Button variant="outlined" key={1} onClick={() => {history.push('/'); this.handleOpenExpand(this);}}><Icon className="iconfont icon-home" />&nbsp;<FormattedMessage id="Article.header.home" /></Button>,
+            articles: <Button variant="outlined" key={2} onClick={() => {history.push('/articles'); this.handleOpenExpand(this);}}><Icon className="iconfont icon-24" />&nbsp;<FormattedMessage id="Article.header.articles" /></Button>,
+            timeline: <Button variant="outlined" key={3} ><Icon className="iconfont icon-tubiaolunkuo-" />&nbsp;<FormattedMessage id="Article.header.date" /></Button>,
+            messageBox: <Button variant="outlined" key={4} ><Icon className="iconfont icon-liuyan" />&nbsp;<FormattedMessage id="Article.header.message" /></Button>,
+            search: <Button variant="outlined" key={5} onClick={() => {this.toggleSearchModal(); this.handleOpenExpand(this);}}><Icon className="iconfont icon-sousuo" />&nbsp;<FormattedMessage id="Article.header.search" /></Button>,
+            about: <Button variant="outlined" key={6} ><Icon className="iconfont icon-wo" />&nbsp;<FormattedMessage id="Article.header.me" /></Button>
+        };
+
+        this.expandHeaderTabsMap = {
+            home: 
+                <MenuItem key={1} onClick={() => {history.push('/'); this.handleOpenExpand(this);}}>
+                    <ListItemIcon>
+                        <Icon className="iconfont icon-home" />
+                    </ListItemIcon>
+                    <ListItemText><FormattedMessage id="Article.header.home" /></ListItemText>
+                </MenuItem>,
+            articles:
+                <MenuItem key={2} onClick={() => {history.push('/articles'); this.handleOpenExpand(this);}}>
+                    <ListItemIcon>
+                        <Icon className="iconfont icon-24" />
+                    </ListItemIcon>
+                    <ListItemText><FormattedMessage id="Article.header.articles" /></ListItemText>
+                </MenuItem>,
+            timeline: null,
+            messageBox: null,
+            search:
+                <MenuItem key={5} onClick={() => {this.toggleSearchModal(); this.handleOpenExpand(this);}}>
+                    <ListItemIcon>
+                        <Icon className="iconfont icon-sousuo" />
+                    </ListItemIcon>
+                    <ListItemText><FormattedMessage id="Article.header.search" /></ListItemText>
+                </MenuItem>,
+            about: null
         };
 
         this.state = {
             expand: false,
-            searchExpand: false
+            searchExpand: false,
+            anchorEl: null
         };
     }
 
@@ -80,14 +114,18 @@ class Header extends React.Component<{ history: History, title?: string, commonS
         this.props.history.push(`/articles/${article.title}`);
     }
     
-    public toggleExpand() {
-        this.setState((preState) => ({ expand: !preState.expand }));
+    public handleOpenExpand(ev) {
+        this.setState({ anchorEl: ev.currentTarget });
+    }
+
+    public handleCloseExpand() {
+        this.setState({ anchorEl: null });
     }
 
     public render() {
         const { title = 'Sammy', history } = this.props;
         const { showTabs } = this.props.commonStore;
-        const { expand, searchExpand } = this.state;
+        const { searchExpand, anchorEl } = this.state;
 
         return (
             <header>
@@ -97,10 +135,10 @@ class Header extends React.Component<{ history: History, title?: string, commonS
                 </section>
                 {searchExpand && <Search onClose={this.toggleSearchModal} history={history} onClickSearchArticle={(v) => this.handleClickSearchArticle.bind(this, v)}/>}
                 <section className="hidden-md">
-                    <WiredButton onClick={this.toggleExpand}><span><FormattedMessage id="Article.header.menu" />&nbsp;<span className="expand">&rsaquo;</span></span></WiredButton>
-                    <section className="to-expand">
-                        {expand && _.at(this.headerTabsMap, showTabs)}
-                    </section>
+                    <Button variant="outlined" aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup="true" onClick={this.handleOpenExpand}><span><FormattedMessage id="Article.header.menu" /></span></Button>
+                    <Menu id="simple-menu" open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={this.handleCloseExpand}>
+                       {_.at(this.expandHeaderTabsMap, showTabs)}
+                    </Menu>
                 </section>
             
             </header>

@@ -24,6 +24,10 @@
     margin-left:auto;
 }
 
+.a-container header .button-list.hidden-sm button {
+    margin: 0 0.5vw;
+}
+
 .a-container .search-container {
     position: fixed;
     z-index: 999;
@@ -168,12 +172,6 @@
     font-family: "Hannotate SC", "Hanzipen SC", "FangSong", "PingFang SC", serif!important;
 }
 
-.expand {
-    display: inline-block;
-    font-weight: 500;
-    transform: rotate(90deg);
-}
-
 .to-expand {
     display: flex;
     flex-direction: column;
@@ -254,11 +252,6 @@
         flex-wrap: wrap;
         flex-direction: row;
         width: 70vw;
-    }
-
-    .a-container header .hidden-md wired-button:first-child{
-        width: 65px;
-        height: 29px;
     }
 
     .a-container header .search {
