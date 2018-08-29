@@ -17,6 +17,7 @@
     height: 40px;
     line-height: 40px;
     overflow: auto;
+    max-width: 50%;
 }
 
 .a-container header .button-list,

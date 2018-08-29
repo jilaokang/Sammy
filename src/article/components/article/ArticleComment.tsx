@@ -4,8 +4,9 @@ import Axios from 'axios';
 import { COSAPIURL_COMMENTS } from '../../../lib/data/baseApiUrl';
 import { FormattedMessage, FormattedDate, injectIntl, InjectedIntl } from 'react-intl';
 import { autobind } from "core-decorators";
-import { WiredTextarea, WiredInput, WiredButton } from 'react-wired-element';
 import * as _ from 'lodash';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const getComment = async (filename: string) => {
     try {
@@ -37,8 +38,9 @@ const putComments = async (filename: string, rawData: any) => {
     }
 };
 
-@autobind()
-class ArticleComment extends React.Component<{article: IArticle, intl: InjectedIntl}, {comments: IComment[], reply: boolean, replyComment: IComment, nickname: string, rawData: any}> {
+@autobind
+class ArticleComment extends React.Component<{article: IArticle, intl: InjectedIntl},
+ {comments: IComment[], reply: boolean, replyComment: IComment, rawData: any, form: { comment: string, nickname: string }}> {
     public REPLAY: string = this.props.intl.formatMessage({ id: 'Article.comments.reply' });
     constructor(args) {
         super(args);
@@ -48,13 +50,15 @@ class ArticleComment extends React.Component<{article: IArticle, intl: InjectedI
             rawData: null,
             reply: false,
             replyComment: null,
-            nickname: initNickname
+            form: {
+                comment: '',
+                nickname: initNickname
+            }
         };
     }
 
     public componentDidMount() {
         this.getComments();
-        document.addEventListener('change', this.changeListener);
     }
 
     public componentDidUpdate(preProps, preState) {
@@ -63,12 +67,14 @@ class ArticleComment extends React.Component<{article: IArticle, intl: InjectedI
         }
     }
 
-    public changeListener(ev) {
-        this.setState({ nickname: ev.target.value });
+    public handleCommentInputChange(ev) {
+        const value = ev.target.value;
+        this.setState(preState => ({ form: { ...preState.form, comment: value } }));
     }
 
-    public componentWillUnmount() {
-        document.removeEventListener('change', this.changeListener);
+    public handleNicknameInputChange(ev) {
+        const value = ev.target.value;
+        this.setState(preState => ({ form: { ...preState.form, nickname: value } }));
     }
 
     public getComments() {
@@ -93,8 +99,8 @@ class ArticleComment extends React.Component<{article: IArticle, intl: InjectedI
     }
 
     public handleSubmit() {
-        const { nickname, replyComment, rawData } = this.state;
-        const comment = (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value;
+        const { replyComment, rawData, form } = this.state;
+        const { nickname, comment } = form;
         if (replyComment) {
             const replyId = replyComment.id;
             const replyUsername = replyComment.username;
@@ -110,8 +116,12 @@ class ArticleComment extends React.Component<{article: IArticle, intl: InjectedI
             };
             rawData.map(cm => {
                 if (replyId === cm.id) {
-                    cm.children = [];
-                    cm.children.push(needPushData);
+                    if (cm.children) {
+                        cm.children.push(needPushData);
+                    } else {
+                        cm.children = [];
+                        cm.children.push(needPushData);
+                    }
                     return cm;
                 } else if (cm.children) {
                     return cm.children.map(c => {
@@ -134,7 +144,7 @@ class ArticleComment extends React.Component<{article: IArticle, intl: InjectedI
         }
         putComments(this.props.article.filename, rawData);
         localStorage.setItem('nickname', nickname);
-        (document.getElementsByTagName('wired-textarea')[0] as HTMLTextAreaElement).value = '';
+        this.setState(preState => ({ form: { ...preState.form, comment: '' } }));
         this.setState({
             comments: rawData,
             rawData
@@ -178,7 +188,8 @@ class ArticleComment extends React.Component<{article: IArticle, intl: InjectedI
     }
 
     public render() {
-        const { comments, reply, replyComment, nickname } = this.state;
+        const { comments, reply, replyComment, form } = this.state;
+        const { nickname, comment } = form;
         return (
             <main className="comment">
                 <h2 className="header">
@@ -187,14 +198,14 @@ class ArticleComment extends React.Component<{article: IArticle, intl: InjectedI
                 </h2>
                 <hr />
                 {comments && this.renderComments(comments)}
-                {reply && <WiredTextarea rows={5} placeholder={`${nickname} ${this.REPLAY} ${replyComment ? replyComment.username : 'Sammy'}`} />}
+                {reply && <TextField rowsMax={6} value={comment} rows={2} multiline={true} fullWidth={true} label={`${nickname} ${this.REPLAY} ${replyComment ? replyComment.username : 'Sammy'}`} onChange={this.handleCommentInputChange} />}
                 <br /><br />
                 {reply && (
                     <section>
                         <span><FormattedMessage id="Article.comments.nickname" />：</span>
-                        <WiredInput required={true} max='20' name='username' value={nickname} />
+                        <TextField required={true} value={nickname} onChange={this.handleNicknameInputChange}/>
                         &nbsp;&nbsp;&nbsp;
-                        <WiredButton onClick={this.handleSubmit}><FormattedMessage id="Article.comments.submit" /></WiredButton>
+                        <Button variant="outlined" onClick={this.handleSubmit}><FormattedMessage id="Article.comments.submit" /></Button>
                     </section>
                 )}
             </main>
