@@ -10,7 +10,7 @@ import { History } from 'history';
 import { injectIntl, InjectedIntl } from 'react-intl';
 import { ArticleComment, ArticleContent, ArticleFooter } from './article';
 
-@autobind()
+@autobind
 class ArticleDetail extends React.Component<{ match: match<{name: string}>, articles: IArticle[], history: History, intl: InjectedIntl }, {articleContent: string, article: IArticle}> {
     public static getDerivedStateFromProps(props, state) {
         const { name: title } = props.match.params;

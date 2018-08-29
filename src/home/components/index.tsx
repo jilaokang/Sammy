@@ -22,7 +22,7 @@ import {autobind} from "core-decorators";
 
 const NOW_YEAR = new Date().getFullYear();
 
-@autobind()
+@autobind
 class Home extends React.Component<{history: History}> {
     constructor(args) {
         super(args);

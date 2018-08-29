@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 
 @inject('articleStore')
 @observer
-@autobind()
+@autobind
 class ArticleListContainer extends React.Component<{ history: History, articleStore: ArticleStore }, any> {
     public handleArticleClick(article) {
         this.props.history.push(`/articles/${article.title}`);
