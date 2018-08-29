@@ -1,6 +1,6 @@
 {
   "Home.base.welcome": "欢迎来到诗亮的博客",
-  "Home.base.words": "千里莺啼绿映红 水村山郭酒旗风",
+  "Home.base.words": "即从巴峡穿巫峡 便下襄阳向洛阳",
   "Home.base.entry": "进去看下又不会死 ->",
   "Home.base.footer.desc": "版权所有 © {year}. 由诗亮基于 React & TypeScript 强力驱动.",
   "Article.header.menu": "菜单",

@@ -17,11 +17,16 @@
     height: 40px;
     line-height: 40px;
     overflow: auto;
+    max-width: 50%;
 }
 
 .a-container header .button-list,
 .a-container header section {
     margin-left:auto;
+}
+
+.a-container header .button-list.hidden-sm button {
+    margin: 0 0.5vw;
 }
 
 .a-container .search-container {
@@ -45,7 +50,6 @@
     left: 0;
     right: 0;
     margin: 0 auto;
-    display: flex;
     flex-direction: column;
     padding: 5vh 2vw;
 }
@@ -59,7 +63,7 @@
     font-size: 30px;
 }
 
-.a-container header .search .header wired-icon-button {
+.a-container header .search .header button {
     float: right;
 }
 
@@ -89,10 +93,6 @@
     background: rgb(0, 0, 0, 0.1);
 }
 
-.a-container header .search .result-list section span {
-    margin-left: 2vw;
-}
-
 .a-container header .search .result-list span.none {
     margin-top: 5vh;
     width: 100%;
@@ -100,13 +100,8 @@
     display: block;
 }
 
-.a-container header .button-list wired-button {
-    margin: 0 5px;
-    font-size: 15px;
-}
 
-
-.a-container main wired-card {
+.a-container main .article-container {
     margin: 40px 0;
     padding: 0 5vw 0 5vw;
     width: 70vw;
@@ -114,7 +109,7 @@
     height: auto;
 }
 
-.a-container main wired-card:hover {
+.a-container main .article-container:hover {
     transform: rotate(1deg);
 }
 
@@ -166,12 +161,6 @@
 
 .markdown-body {
     font-family: "Hannotate SC", "Hanzipen SC", "FangSong", "PingFang SC", serif!important;
-}
-
-.expand {
-    display: inline-block;
-    font-weight: 500;
-    transform: rotate(90deg);
 }
 
 .to-expand {
@@ -254,11 +243,6 @@
         flex-wrap: wrap;
         flex-direction: row;
         width: 70vw;
-    }
-
-    .a-container header .hidden-md wired-button:first-child{
-        width: 65px;
-        height: 29px;
     }
 
     .a-container header .search {
