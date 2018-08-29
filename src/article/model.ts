@@ -33,11 +33,13 @@ export class ArticleStore {
 
     @action
     public nextPage() {
+        window.scrollTo(0,0);
         this.page++;
     }
 
     @action
     public prePage() {
+        window.scrollTo(0,0);
         this.page--;
     }
 
