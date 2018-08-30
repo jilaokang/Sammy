@@ -21,6 +21,7 @@ class Header extends React.Component<{ history: History, title?: string, commonS
     public headerTabsMap: { [key: string]: JSX.Element };
     public expandHeaderTabsMap: { [key: string]: JSX.Element };
     public autoScroller: any;
+    public t: number;
 
     constructor(args) {
         super(args);
@@ -76,37 +77,45 @@ class Header extends React.Component<{ history: History, title?: string, commonS
 
     public componentDidMount() {
         this.props.commonStore.fetchShowTabs();
+        this.runAutoScroll();
+    }
 
+    public autoScrollTitle(o, lh, speed, delay) {
+        const oHeight = 40;
+        let preTop = 0;
+        o.scrollTop = 0;
+        const start = () => {
+            this.t = setInterval(scrolling, speed);
+            o.scrollTop += 1;
+        };
+        const scrolling = () => {
+            if (o.scrollTop % lh !== 0 && o.scrollTop % (o.scrollHeight - oHeight - 1) !== 0) {
+                preTop = o.scrollTop;
+                o.scrollTop += 1;
+                if (preTop >= o.scrollHeight || preTop === o.scrollTop) {
+                    clearInterval(this.t);
+                    o.scrollTop = 0;
+                }
+            } else {
+                clearInterval(this.t);
+                setTimeout(start, delay);
+            }
+        };
+        start();
+    }
+
+    public runAutoScroll() {
         const o = document.getElementById("title");
 
-        const autoScrollTitle = (lh, speed, delay) => {
-            let t;
-            const oHeight = 40;
-            let preTop = 0;
-            o.scrollTop = 0;
-            const start = () => {
-                t = setInterval(scrolling, speed);
-                o.scrollTop += 1;
-            };
-            const scrolling = () => {
-                if (o.scrollTop % lh !== 0 && o.scrollTop % (o.scrollHeight - oHeight - 1) !== 0) {
-                    preTop = o.scrollTop;
-                    o.scrollTop += 1;
-                    if (preTop >= o.scrollHeight || preTop === o.scrollTop) {
-                        o.scrollTop = 0;
-                        clearInterval(t);
-                    }
-                } else {
-                    clearInterval(t);
-                    setTimeout(start, delay);
-                }
-            };
-            start();
-        };
+        clearInterval(this.t);
 
         if (o.scrollHeight > 50) {
-            autoScrollTitle(50, 50, 1);
+            this.autoScrollTitle(o, 50, 50, 1);
         }
+    }
+
+    public componentDidUpdate() {
+        this.runAutoScroll();
     }
 
     public handleClickSearchArticle(article: IArticle) {
