@@ -122,24 +122,38 @@ class Header extends React.Component<{ history: History, title?: string, commonS
         this.setState({ anchorEl: null });
     }
 
+    public renderMenu() {
+        const { showTabs } = this.props.commonStore;
+        const { anchorEl } = this.state;
+        return (
+            <div>
+                <Button variant="outlined" aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup="true" onClick={this.handleOpenExpand}><span><FormattedMessage id="Article.header.menu" /></span></Button>
+                    <Menu id="simple-menu" open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={this.handleCloseExpand}>
+                       {_.at(this.expandHeaderTabsMap, showTabs)}
+                    </Menu>
+            </div>
+        );
+    }
+
     public render() {
         const { title = 'Sammy', history } = this.props;
         const { showTabs } = this.props.commonStore;
-        const { searchExpand, anchorEl } = this.state;
+        const { searchExpand } = this.state;
+
+        const needShowExpand = title !== 'Sammy';
 
         return (
             <header>
                 <p className="title" onClick={() => history.goBack()} id="title">{title}</p>
-                <section className="button-list hidden-sm">
+                {!needShowExpand ? <section className="button-list hidden-sm">
                     {_.at(this.headerTabsMap, showTabs)}
-                </section>
+                </section> : <section>
+                    {this.renderMenu()}
+                </section>}
                 {searchExpand && <Search onClose={this.toggleSearchModal} history={history} onClickSearchArticle={(v) => this.handleClickSearchArticle.bind(this, v)}/>}
-                <section className="hidden-md">
-                    <Button variant="outlined" aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup="true" onClick={this.handleOpenExpand}><span><FormattedMessage id="Article.header.menu" /></span></Button>
-                    <Menu id="simple-menu" open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={this.handleCloseExpand}>
-                       {_.at(this.expandHeaderTabsMap, showTabs)}
-                    </Menu>
-                </section>
+                {!needShowExpand && <section className="hidden-md">
+                    {this.renderMenu()}
+                </section>}
             
             </header>
         );
