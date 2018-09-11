@@ -3,8 +3,9 @@
 Feature：
 
 > * Message Box
-> * Suppor Search: Search By Tags, Title and Content
 > * Resume
+> * Time Line
+> * Everyone Can Submission
 
 ## Have a Look
 
