@@ -12,6 +12,7 @@ import * as _ from 'lodash';
 @inject("articleStore")
 @autobind
 class Search extends React.Component<{ onClose: any, intl: InjectedIntl, articleStore: ArticleStore, onClickSearchArticle: any }, { search: string, searchResult: IArticle[], close: boolean }> {
+    public escPressEventListener: EventListenerOrEventListenerObject;
     constructor(args) {
         super(args);
         this.state = {
@@ -19,6 +20,16 @@ class Search extends React.Component<{ onClose: any, intl: InjectedIntl, article
             searchResult: [],
             close: false
         };
+        this.handleEscPress();
+    }
+
+    public handleEscPress() {
+        this.escPressEventListener = (ev: KeyboardEvent) => {
+            if (ev.code === 'Escape') {
+                this.handleClose();
+            }
+        };
+        document.addEventListener('keydown', this.escPressEventListener);
     }
 
     public handleInputChange(ev) {
@@ -27,9 +38,20 @@ class Search extends React.Component<{ onClose: any, intl: InjectedIntl, article
         this.setState({ search: value, searchResult: articleStore.getArticlesBySearch(value) });
     }
 
+    public handleClose() {
+        const { onClose } = this.props;
+        this.setState({ close: true }); setTimeout(() => {
+            onClose();
+        }, 700);
+    }
+
+    public componentWillUnmount() {
+        document.removeEventListener('keydown', this.escPressEventListener);
+    }
+
     public render() {
-        const { onClose, intl, onClickSearchArticle } = this.props;
-        const { search, searchResult, close } = this.state;
+        const { intl, onClickSearchArticle } = this.props;
+        const { searchResult, close } = this.state;
         const PLHD = intl.formatMessage({
             id: 'Search.input.plhd'
         });
@@ -38,11 +60,7 @@ class Search extends React.Component<{ onClose: any, intl: InjectedIntl, article
                 <Card className={close ? 'search animated slideOutUp' : 'search animated slideInDown'}>
                     <section className="header">
                         <FormattedHTMLMessage id="Search.header.title" />
-                        <IconButton onClick={() => {
-                            this.setState({ close: true }); setTimeout(() => {
-                                onClose();
-                            }, 700);
-                        }}><i className="iconfont icon-guanbi" /></IconButton>
+                        <IconButton onClick={this.handleClose}><i className="iconfont icon-guanbi" /></IconButton>
                     </section>
                     <section className="input">
                         <TextField label={PLHD} name="search" fullWidth={true} onChange={this.handleInputChange} />

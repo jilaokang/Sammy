@@ -22,5 +22,5 @@
   "Push.articles.new": "Sammy Liang wrote {number} articles in all",
   "Search.header.title": "Article search",
   "Search.input.plhd": "Search by title, tag or date of the article",
-  "Search.base.none": "No search results. Input some text and press the enter button  "
+  "Search.base.none": "No search results. Please input some text"
 }
