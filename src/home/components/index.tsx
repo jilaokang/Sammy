@@ -1,31 +1,32 @@
 import * as React from 'react';
-
 import './index.css';
-
 import {FormattedMessage} from 'react-intl';
-
+import Axios from 'axios';
 import lang from '../../lang';
-
 import Card from '@material-ui/core/Card';
-
 import Select from '@material-ui/core/Select';
-
 import MenuItem from '@material-ui/core/MenuItem';
-
 import Button from '@material-ui/core/Button';
-
 import IconButton from '@material-ui/core/IconButton';
-
-import {History} from 'history';
-
-import {autobind} from "core-decorators";
+import { History } from 'history';
+import { autobind } from "core-decorators";
+import { COSAPIURL } from '../../lib/data/baseApiUrl';
 
 const NOW_YEAR = new Date().getFullYear();
 
 @autobind
-class Home extends React.Component<{history: History}> {
+class Home extends React.Component<{history: History}, {welcomeStr: string}> {
     constructor(args) {
         super(args);
+        this.state = {
+            welcomeStr: ''
+        };
+        this.getWelcomeString();
+    }
+
+    public getWelcomeString() {
+        Axios.get(`${COSAPIURL}welcome-config.json`)
+            .then(res => this.setState({ welcomeStr: res.data[lang.locale] }));
     }
 
     public handlelangSelectChange(event) {
@@ -54,6 +55,7 @@ class Home extends React.Component<{history: History}> {
     }
 
     public render() {
+        const { welcomeStr } = this.state;
         return (
             <section className='home-container animated fadeIn'>
                 <Card elevation={5}>
@@ -65,7 +67,7 @@ class Home extends React.Component<{history: History}> {
                             </Select>
                         </section>
                         <section className="words">
-                            <FormattedMessage id="Home.base.words"/>
+                            <span>{welcomeStr}</span>
                         </section>
                         <FormattedMessage id="Home.base.welcome"/>
                         <section className="w-btn">
