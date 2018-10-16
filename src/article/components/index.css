@@ -135,9 +135,24 @@
     margin-left: auto;
 }
 
-.footer-pagination .pre,
-.footer-article-go .pre {
+.footer-article-go {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.footer-article-go svg {
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.footer-pagination .pre {
     float: left;
+}
+
+.footer-article-go .pre {
+    margin-right: auto;
 }
 
 .footer-pagination .pre:hover,
@@ -145,9 +160,11 @@
     transform: rotate(-5deg);
 }
 
-.footer-pagination .next,
-.footer-article-go .next {
+.footer-pagination .next {
     float: right;
+}
+.footer-article-go .next {
+    margin-left: auto;
 }
 
 .footer-pagination .next:hover,

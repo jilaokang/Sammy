@@ -59,6 +59,10 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
         history.push(`/articles/${newArticle.title}`);
     }
 
+    public handleArticleShare() {
+
+    }
+
     public render() {
         const { history } = this.props;
         const { article, articleContent } = this.state;
@@ -70,7 +74,7 @@ class ArticleDetail extends React.Component<{ match: match<{name: string}>, arti
 
                 <ArticleComment article={article}  />
 
-                <ArticleFooter onArticleJump={v => this.handleArticleJump.bind(this, v)} />
+                <ArticleFooter onArticleJump={v => this.handleArticleJump.bind(this, v)} onArticleShare={this.handleArticleShare} />
             </section>
         );
     }
